@@ -30,6 +30,24 @@
   gap: 8px;
 }
 
+.payment-radio {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #635bff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 16px;
+}
+
+.payment-radio__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #635bff;
+}
+
 .stripe-card__header-title {
   font-family: var(--font\/family\/body);
   font-size: var(--font\/size\/body-m-action-m);
@@ -41,12 +59,88 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  min-width: 0;
 }
 
-.stripe-card__header-right img {
+.payment-brand {
+  position: relative;
+  width: 34px;
+  height: 22px;
+  border: 1px solid #d9dee7;
+  border-radius: 3px;
+  background: #fff;
+  color: #1f2937;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 34px;
+  overflow: hidden;
+  box-shadow: 0 1px 1px rgba(20, 30, 50, 0.05);
+}
+
+.payment-brand__word {
+  position: relative;
+  z-index: 1;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.payment-brand--visa .payment-brand__word {
+  color: #1a1f71;
+  font-size: 10px;
+  font-style: italic;
+}
+
+.payment-brand--mastercard {
+  background: #252525;
+  border-color: #252525;
+}
+
+.payment-brand__circle {
+  position: absolute;
+  top: 5px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+
+.payment-brand__circle--red {
+  left: 9px;
+  background: #eb001b;
+}
+
+.payment-brand__circle--yellow {
+  right: 9px;
+  background: #f79e1b;
+  mix-blend-mode: screen;
+}
+
+.payment-brand--amex {
+  background: #2e77bc;
+  border-color: #2e77bc;
+}
+
+.payment-brand--amex .payment-brand__word {
+  color: #ffffff;
+  font-size: 7px;
+}
+
+.payment-brand--discover .payment-brand__word {
+  color: #111827;
+  font-size: 7px;
+}
+
+.payment-brand__sun {
+  position: absolute;
+  right: -3px;
+  bottom: -6px;
+  width: 20px;
   height: 20px;
-  width: auto;
-  display: block;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fbb03b 0 35%, #f58220 36% 100%);
 }
 
 .stripe-card__more-cards {
@@ -74,6 +168,21 @@
   gap: 8px;
 }
 
+.link-mark {
+  width: 34px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 34px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  color: #00a86b;
+  letter-spacing: 0;
+}
+
 .stripe-field__placeholder {
   font-family: var(--font\/family\/body);
   font-size: var(--font\/size\/body-l-action-l);
@@ -86,6 +195,10 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+
+.cvc-icon {
+  flex: 0 0 auto;
 }
 
 .stripe-field-row {
@@ -128,19 +241,46 @@
   gap: 12px;
 }
 
-.stripe-option__icon {
+.payment-option-mark {
   width: 32px;
   height: 24px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  flex: 0 0 32px;
+  border-radius: 4px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
-.stripe-option__icon img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+.payment-option-mark--afterpay {
+  background: #b2fce4;
+  color: #0b1f1a;
+}
+
+.payment-option-mark--cashapp {
+  background: #00d632;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.payment-option-mark--klarna {
+  background: #ffb3c7;
+  color: #111111;
+}
+
+.payment-option-mark--affirm {
+  background: #ffffff;
+  color: #1769ff;
+  border: 1px solid #d8dde6;
+  font-size: 13px;
+}
+
+.payment-option-mark--empty {
+  background: transparent;
 }
 
 .stripe-option__label {
@@ -161,8 +301,9 @@
   gap: 8px;
 }
 
-.btn-payment-continue img {
-  filter: brightness(0) invert(1);
+.btn-payment-continue svg {
+  color: currentColor;
+  flex: 0 0 auto;
 }
 
 /* ── Terms text ─────────────────────────────────── */

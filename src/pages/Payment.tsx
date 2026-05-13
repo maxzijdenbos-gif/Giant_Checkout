@@ -2,11 +2,6 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Divider from '../components/Divider'
 import OrderSummary from '../components/OrderSummary'
-import {
-  imgPen, imgStripeIcon, imgLinkIcon, imgCvcIcon,
-  imgPayOptionIcon, imgAffirmIcon, imgArrowRight,
-  imgVisa, imgMastercard, imgAmex, imgDiscover,
-} from '../assets'
 import { DELIVERY_OPTIONS } from '../types'
 import type { DeliverySelection } from '../types'
 import './DeliveryOptions.css'
@@ -19,18 +14,98 @@ interface Props {
 }
 
 const PAYMENT_OPTIONS = [
-  { id: 'afterpay',  label: 'Afterpay / Clearpay', icon: imgPayOptionIcon },
-  { id: 'cashapp',   label: 'Cash App Pay',         icon: imgPayOptionIcon },
-  { id: 'klarna',    label: 'Klarna',               icon: imgPayOptionIcon },
-  { id: 'affirm',    label: 'Affirm',               icon: imgAffirmIcon   },
-  { id: 'more',      label: 'More payment options', icon: null            },
-]
+  { id: 'afterpay', label: 'Afterpay / Clearpay' },
+  { id: 'cashapp', label: 'Cash App Pay' },
+  { id: 'klarna', label: 'Klarna' },
+  { id: 'affirm', label: 'Affirm' },
+  { id: 'more', label: 'More payment options' },
+] as const
+
+type PaymentOptionId = typeof PAYMENT_OPTIONS[number]['id']
 
 function ChevronRight() {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
+  )
+}
+
+function ArrowRightIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3 8H13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function EditIcon() {
+  return (
+    <svg className="collapsed-step__edit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 16.75V20H7.25L17.08 10.17L13.83 6.92L4 16.75Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M15.25 5.5L18.5 8.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function SelectedPaymentIcon() {
+  return (
+    <span className="payment-radio" aria-hidden="true">
+      <span className="payment-radio__dot" />
+    </span>
+  )
+}
+
+function LinkMark() {
+  return <span className="link-mark" aria-hidden="true">Link</span>
+}
+
+function CvcIcon() {
+  return (
+    <svg className="cvc-icon" width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden="true">
+      <rect x="1" y="3" width="26" height="16" rx="2.5" stroke="#697386" strokeWidth="1.2" />
+      <path d="M1.5 7.5H26.5" stroke="#697386" strokeWidth="1.2" />
+      <circle cx="16.5" cy="13.5" r="1.1" fill="#697386" />
+      <circle cx="20" cy="13.5" r="1.1" fill="#697386" />
+      <circle cx="23.5" cy="13.5" r="1.1" fill="#697386" />
+    </svg>
+  )
+}
+
+function CardBrand({ brand }: { brand: 'visa' | 'mastercard' | 'amex' | 'discover' }) {
+  return (
+    <span className={`payment-brand payment-brand--${brand}`} aria-hidden="true">
+      {brand === 'visa' && <span className="payment-brand__word">VISA</span>}
+      {brand === 'mastercard' && (
+        <>
+          <span className="payment-brand__circle payment-brand__circle--red" />
+          <span className="payment-brand__circle payment-brand__circle--yellow" />
+        </>
+      )}
+      {brand === 'amex' && <span className="payment-brand__word">AMEX</span>}
+      {brand === 'discover' && (
+        <>
+          <span className="payment-brand__word">DISC</span>
+          <span className="payment-brand__sun" />
+        </>
+      )}
+    </span>
+  )
+}
+
+function PaymentOptionIcon({ id }: { id: PaymentOptionId }) {
+  if (id === 'more') {
+    return <span className="payment-option-mark payment-option-mark--empty" aria-hidden="true" />
+  }
+
+  return (
+    <span className={`payment-option-mark payment-option-mark--${id}`} aria-hidden="true">
+      {id === 'afterpay' && <span>AP</span>}
+      {id === 'cashapp' && <span>$</span>}
+      {id === 'klarna' && <span>K.</span>}
+      {id === 'affirm' && <span>af</span>}
+    </span>
   )
 }
 
@@ -55,7 +130,7 @@ export default function Payment({ onBackToAddress, onBackToDelivery, deliverySel
             >
               <div className="collapsed-step__header">
                 <h2 className="checkout-step__heading">Address</h2>
-                <img src={imgPen} alt="" width="24" height="24" className="collapsed-step__edit-icon" />
+                <EditIcon />
               </div>
               <div className="address-summary">
                 <p className="address-summary__section-title">Delivery address</p>
@@ -77,7 +152,7 @@ export default function Payment({ onBackToAddress, onBackToDelivery, deliverySel
             >
               <div className="collapsed-step__header">
                 <h2 className="checkout-step__heading">Delivery options</h2>
-                <img src={imgPen} alt="" width="24" height="24" className="collapsed-step__edit-icon" />
+                <EditIcon />
               </div>
               <div className="address-summary">
                 <div className="address-summary__lines">
@@ -100,21 +175,21 @@ export default function Payment({ onBackToAddress, onBackToDelivery, deliverySel
                 <div className="stripe-card">
                   <div className="stripe-card__header">
                     <div className="stripe-card__header-left">
-                      <img src={imgStripeIcon} alt="" width="16" height="16" />
+                      <SelectedPaymentIcon />
                       <span className="stripe-card__header-title">Card</span>
                     </div>
                     <div className="stripe-card__header-right">
-                      <img src={imgVisa}       alt="Visa"       />
-                      <img src={imgMastercard} alt="Mastercard" />
-                      <img src={imgAmex}       alt="Amex"       />
-                      <img src={imgDiscover}   alt="Discover"   />
+                      <CardBrand brand="visa" />
+                      <CardBrand brand="mastercard" />
+                      <CardBrand brand="amex" />
+                      <CardBrand brand="discover" />
                       <span className="stripe-card__more-cards">+3</span>
                     </div>
                   </div>
 
                   {/* Link by Stripe */}
                   <div className="stripe-field stripe-field--link">
-                    <img src={imgLinkIcon} alt="Link" height="16" />
+                    <LinkMark />
                     <span className="stripe-field__placeholder">Pay faster with Link</span>
                   </div>
 
@@ -131,7 +206,7 @@ export default function Payment({ onBackToAddress, onBackToDelivery, deliverySel
                     <div className="stripe-field stripe-field--half">
                       <div className="stripe-field__row">
                         <span className="stripe-field__placeholder">CVC</span>
-                        <img src={imgCvcIcon} alt="" height="20" />
+                        <CvcIcon />
                       </div>
                     </div>
                   </div>
@@ -146,9 +221,7 @@ export default function Payment({ onBackToAddress, onBackToDelivery, deliverySel
                 {PAYMENT_OPTIONS.map(opt => (
                   <button key={opt.id} className="stripe-option">
                     <div className="stripe-option__left">
-                      <div className="stripe-option__icon">
-                        {opt.icon && <img src={opt.icon} alt="" />}
-                      </div>
+                      <PaymentOptionIcon id={opt.id} />
                       <span className="stripe-option__label">{opt.label}</span>
                     </div>
                     <span className="stripe-option__chevron"><ChevronRight /></span>
@@ -159,7 +232,7 @@ export default function Payment({ onBackToAddress, onBackToDelivery, deliverySel
               {/* CTA */}
               <button className="btn-save-continue btn-payment-continue">
                 Place order
-                <img src={imgArrowRight} alt="" width="16" height="16" />
+                <ArrowRightIcon />
               </button>
 
               <p className="payment-terms">
