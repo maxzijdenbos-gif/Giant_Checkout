@@ -1,0 +1,129 @@
+.checkout-start__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--general\/l) var(--general\/m);
+  gap: var(--general\/l);
+}
+
+.checkout-start__title {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-m-body-xl);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  text-align: center;
+}
+
+.checkout-start__options {
+  display: flex;
+  gap: var(--general\/xl);
+  align-items: flex-start;
+}
+
+/* Cards */
+.option-card {
+  width: 341px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--general\/ml);
+  padding: var(--general\/l) var(--general\/ml);
+  border-radius: var(--general\/m);
+}
+
+.option-card--shaded {
+  background: var(--colors\/grey-05);
+}
+
+.option-card__title {
+  font-family: var(--font\/family\/display);
+  font-weight: 800;
+  font-size: var(--font\/size\/display-xsmall);
+  line-height: var(--font\/font\/line-height\/large);
+  text-transform: uppercase;
+  color: var(--contrast);
+}
+
+.option-card__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/sm);
+  width: 100%;
+}
+
+/* Shared button styles */
+.btn {
+  height: 40px;
+  width: 100%;
+  padding: 0 var(--spacing\/sm);
+  border-radius: var(--general\/ml);
+  border: 2px solid transparent;
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-s-action-s);
+  line-height: var(--font\/font\/line-height\/xsmall);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn:hover { opacity: 0.85; }
+
+.btn--primary {
+  background: var(--colors\/primary);
+  color: var(--colors\/white);
+}
+
+.btn--outline {
+  background: transparent;
+  border-color: var(--colors\/primary);
+  color: var(--colors\/primary);
+}
+
+/* Benefits */
+.option-card__benefits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/sm);
+  width: 100%;
+}
+
+.option-card__benefits-title {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-m-body-xl);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.option-card__benefits-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.option-card__benefit {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing\/xxs);
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/small);
+  color: var(--contrast);
+}
+
+@media (max-width: 800px) {
+  .checkout-start__options {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing\/sm);
+    width: 100%;
+  }
+
+  .option-card {
+    width: 100%;
+    max-width: 420px;
+  }
+}

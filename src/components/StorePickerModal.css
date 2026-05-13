@@ -1,0 +1,274 @@
+/* ── Backdrop ───────────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Modal card ─────────────────────────────────── */
+.modal-card {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  width: 1348px;
+  max-width: 95vw;
+  height: 620px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Left panel ─────────────────────────────────── */
+.modal-left {
+  width: 440px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--general\/ml);
+  overflow: hidden;
+  position: relative;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--general\/m);
+  flex: 1;
+  min-height: 0;
+}
+
+.modal-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/xs);
+  flex-shrink: 0;
+}
+
+.modal-title {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-large);
+  line-height: var(--font\/font\/line-height\/large);
+  color: var(--contrast);
+}
+
+/* ── Search field ───────────────────────────────── */
+.modal-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1.5px solid var(--colors\/grey-10);
+  border-radius: 8px;
+  padding: var(--general\/s) var(--spacing\/sm);
+  background: #ffffff;
+}
+
+.modal-search__text {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-s-action-s);
+  line-height: var(--font\/font\/line-height\/small);
+  color: var(--contrast-variant);
+  flex: 1;
+}
+
+.modal-search__icons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing\/xs);
+  color: var(--contrast);
+}
+
+.modal-search__divider {
+  width: 1px;
+  height: 20px;
+  background: var(--colors\/grey-10);
+}
+
+/* ── Store list ─────────────────────────────────── */
+.modal-stores {
+  display: flex;
+  flex-direction: column;
+  gap: var(--general\/s);
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── Store card ─────────────────────────────────── */
+.store-card {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: var(--spacing\/m);
+  border: 1.5px solid var(--colors\/grey-10);
+  border-radius: 8px;
+  background: #ffffff;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.store-card--selected {
+  border-color: var(--colors\/primary);
+}
+
+.store-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.store-card__icon img {
+  display: block;
+}
+
+.store-card__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/xs);
+}
+
+.store-card__name {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-m-body-xl);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.store-card__availability {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/xxs);
+}
+
+.store-card__avail-primary {
+  font-family: var(--font\/family\/body);
+  font-weight: 700;
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  display: block;
+}
+
+.store-card__avail-detail {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-s-action-s);
+  line-height: var(--font\/font\/line-height\/small);
+  color: var(--contrast);
+  display: block;
+}
+
+.store-card__address {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.store-card__distance {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Actions ────────────────────────────────────── */
+.modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  padding-top: 8px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.modal-actions__fade {
+  position: absolute;
+  bottom: 100%;
+  left: -32px;
+  right: -32px;
+  height: 41px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.08));
+  pointer-events: none;
+}
+
+.modal-cancel {
+  height: 48px;
+  padding: 0 var(--general\/s);
+  background: transparent;
+  border: none;
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-m-action-m);
+  text-transform: uppercase;
+  color: var(--contrast);
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.modal-confirm {
+  height: 48px;
+  padding: 0 var(--general\/m);
+  background: var(--colors\/primary);
+  border: none;
+  border-radius: var(--general\/ml);
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-m-action-m);
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.modal-confirm:hover { opacity: 0.9; }
+
+/* ── Right panel: map ───────────────────────────── */
+.modal-map {
+  flex: 1;
+  background: #e8e8e8;
+  overflow: hidden;
+  position: relative;
+}
+
+.modal-map img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: none;
+}
+
+/* ── Close button ───────────────────────────────── */
+.modal-close {
+  position: absolute;
+  top: var(--general\/m);
+  right: var(--general\/m);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--general\/ml);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--contrast);
+}

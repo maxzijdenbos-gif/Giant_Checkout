@@ -1,0 +1,73 @@
+.input-field {
+  position: relative;
+  width: 100%;
+  height: 56px;
+  border-bottom: 1px solid var(--tint);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: var(--spacing\/s);
+}
+
+.input-field__label {
+  position: absolute;
+  bottom: var(--spacing\/s);
+  left: 0;
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-s-action-s);
+  line-height: var(--font\/font\/line-height\/xsmall);
+  color: var(--contrast-variant);
+  letter-spacing: 0.24px;
+  pointer-events: none;
+  transition: bottom 0.15s ease, font-size 0.15s ease;
+  white-space: nowrap;
+}
+
+.input-field__input,
+.input-field__select {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/small);
+  color: var(--contrast);
+  padding: 0;
+  width: 100%;
+  height: var(--font\/font\/line-height\/small);
+  opacity: 0; /* hidden until filled/focused */
+  transition: opacity 0.15s;
+}
+
+/* Reveal input & float label on focus or fill */
+.input-field:focus-within .input-field__label,
+.input-field--filled .input-field__label {
+  bottom: calc(var(--spacing\/s) + var(--font\/font\/line-height\/small) + 2px);
+  font-size: 10px;
+}
+
+.input-field:focus-within .input-field__input,
+.input-field:focus-within .input-field__select,
+.input-field--filled .input-field__input {
+  opacity: 1;
+}
+
+/* Locked state */
+.input-field--locked .input-field__label {
+  color: var(--contrast-variant);
+  bottom: calc(var(--spacing\/s) + var(--font\/font\/line-height\/small) + 2px);
+  font-size: 10px;
+}
+
+.input-field--locked .input-field__input,
+.input-field--locked .input-field__select {
+  opacity: 1;
+  color: var(--contrast-variant);
+}
+
+/* Focus underline highlight */
+.input-field:focus-within {
+  border-bottom-color: var(--contrast);
+}

@@ -1,0 +1,197 @@
+.order-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--general\/m);
+  width: 341px;
+}
+
+/* Header */
+.order-summary__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.order-summary__title {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-large);
+  line-height: var(--font\/font\/line-height\/large);
+  color: var(--contrast);
+}
+
+.order-summary__edit {
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/xsmall);
+  text-transform: uppercase;
+  color: var(--contrast);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Line items */
+.order-summary__lines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--general\/xxs);
+}
+
+.order-summary__line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.order-summary__line-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing\/xxs);
+  color: var(--contrast);
+}
+
+.order-summary__line-value {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.order-summary__line-value--savings {
+  color: #c83317;
+}
+
+.order-summary__line--savings .order-summary__line-label {
+  color: #58626e;
+}
+
+/* Info icon */
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-left: var(--spacing\/xxs);
+  cursor: pointer;
+}
+
+/* Total */
+.order-summary__total {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-m-body-xl);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+/* Coupon button */
+.order-summary__coupon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 56px;
+  padding: 0 var(--spacing\/s);
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.order-summary__coupon:hover {
+  background: var(--colors\/grey-05);
+}
+
+.order-summary__coupon-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing\/xs);
+}
+
+.order-summary__coupon-label {
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+/* Product tiles */
+.order-summary__products {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/s);
+}
+
+.product-tile {
+  display: flex;
+  gap: var(--general\/s);
+  align-items: flex-start;
+}
+
+.product-tile__image {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  background: var(--colors\/white);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--general\/s);
+}
+
+.product-tile__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-tile__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--general\/xs);
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+}
+
+.product-tile__name {
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.product-tile__price {
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.product-tile__price--sale {
+  color: var(--alert);
+}
+
+.product-tile__price--original {
+  text-decoration: line-through;
+  color: var(--contrast);
+}
+
+.product-tile__meta {
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/small);
+  color: var(--contrast-variant);
+}

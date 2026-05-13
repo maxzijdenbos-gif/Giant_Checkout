@@ -1,0 +1,149 @@
+/* ── Two-column split layout ───────────────────────── */
+.delivery-layout {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+}
+
+/* Left: white, flex-grow, content right-aligned at 641px */
+.delivery-left {
+  flex: 1;
+  background: var(--tone);
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--general\/l) var(--general\/xl);
+}
+
+.delivery-left__inner {
+  width: 641px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--general\/ml);
+}
+
+/* Right: grey, fixed 570px */
+.delivery-right {
+  width: 570px;
+  flex-shrink: 0;
+  background: var(--colors\/grey-05);
+  padding: var(--general\/l) var(--general\/ml);
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* ── Checkout step ─────────────────────────────────── */
+.checkout-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/m);
+}
+
+.checkout-step__heading {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-large);
+  line-height: var(--font\/font\/line-height\/large);
+  color: var(--contrast);
+}
+
+.checkout-step--collapsed {
+  gap: var(--spacing\/m);
+}
+
+/* ── Form grid ─────────────────────────────────────── */
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/sm);
+}
+
+.form-row {
+  display: flex;
+  gap: var(--general\/s);
+  align-items: flex-end;
+}
+
+.form-row > * {
+  flex: 1;
+  min-width: 0;
+}
+
+.form-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--general\/s);
+}
+
+.form-spacer {
+  flex: 1;
+}
+
+.form-note {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-s-action-s);
+  line-height: var(--font\/font\/line-height\/xsmall);
+  color: var(--contrast);
+  letter-spacing: 0.24px;
+}
+
+/* ── Save and continue button ──────────────────────── */
+.btn-save-continue {
+  height: 48px;
+  background: var(--colors\/primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--general\/ml);
+  padding: 0 var(--general\/m);
+  font-family: var(--font\/family\/action);
+  font-size: var(--font\/size\/body-m-action-m);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.btn-save-continue:hover {
+  opacity: 0.9;
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .delivery-left {
+    padding: var(--general\/l) var(--general\/m);
+    justify-content: center;
+  }
+
+  .delivery-right {
+    width: 380px;
+    padding: var(--general\/l) var(--spacing\/m);
+  }
+}
+
+@media (max-width: 800px) {
+  .delivery-layout {
+    flex-direction: column;
+  }
+
+  .delivery-left {
+    justify-content: center;
+    padding: var(--general\/m);
+  }
+
+  .delivery-left__inner {
+    width: 100%;
+  }
+
+  .delivery-right {
+    width: 100%;
+    justify-content: center;
+    padding: var(--general\/m);
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}

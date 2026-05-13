@@ -1,0 +1,63 @@
+/* ============================================================
+   Giant Design Tokens
+   Source: Figma file UBWn3EC1uJ0BDDAn2M68MW (✏️ Design page)
+   Token names mirror the Figma library exactly.
+   ============================================================ */
+
+:root {
+
+  /* -- Colors ------------------------------------------------ */
+  --colors\/primary:       #06038d;
+  --colors\/white:         #ffffff;
+  --colors\/grey-05:       #f2f2f5;
+  --colors\/grey-10:       #dedee0;
+
+  /* Semantic color aliases */
+  --contrast:              #000000;   /* primary text on light bg    */
+  --contrast-variant:      #58626e;   /* secondary / muted text      */
+  --tone:                  #ffffff;   /* header / page surface       */
+  --tint:                  #dedee0;   /* light tint surface          */
+  --tint-variant:          #f2f2f5;   /* footer / alternate tint     */
+  --alert:                 #c83317;   /* error / alert red           */
+  --surface---cta:         #06038d;   /* CTA surface (= primary)     */
+  --text---accent:         #58626e;   /* accent text (= contrast-variant) */
+  --giant\/white:          #ffffff;
+
+  /* -- Typography: Font families ----------------------------- */
+  --font\/family\/display:  'Overpass', sans-serif;   /* weight: 800 */
+  --font\/family\/headline: 'Overpass', sans-serif;   /* weight: 700 */
+  --font\/family\/action:   'Overpass', sans-serif;   /* weight: 600 or 800 */
+  --font\/family\/body:     'Open Sans', sans-serif;  /* weight: 400 or 700 */
+
+  /* -- Typography: Font sizes -------------------------------- */
+  --font\/size\/display-xsmall:    28px;
+  --font\/size\/headline-large:    24px;
+  --font\/size\/headline-m-body-xl: 20px;
+  --font\/size\/body-l-action-l:   16px;
+  --font\/size\/body-m-action-m:   14px;
+  --font\/size\/body-s-action-s:   12px;
+
+  /* -- Typography: Line heights ------------------------------ */
+  --font\/font\/line-height\/large:  32px;
+  --font\/font\/line-height\/medium: 24px;
+  --font\/font\/line-height\/small:  20px;
+  --font\/font\/line-height\/xsmall: 16px;
+
+  /* -- Spacing: General (layout gaps, padding) --------------- */
+  --general\/xxs: 4px;
+  --general\/xs:  8px;
+  --general\/s:  12px;
+  --general\/m:  24px;
+  --general\/ml: 32px;
+  --general\/l:  48px;
+  --general\/xl: 64px;
+
+  /* -- Spacing: Component-level ------------------------------ */
+  --spacing\/xxs: 4px;
+  --spacing\/xs:  8px;
+  --spacing\/s:  12px;
+  --spacing\/sm: 16px;
+  --spacing\/m:  24px;
+  --spacing\/l:  48px;
+
+}

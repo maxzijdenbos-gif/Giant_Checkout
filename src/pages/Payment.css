@@ -1,0 +1,179 @@
+/* Payment page reuses delivery-layout, checkout-step, collapsed-step from DeliveryOptions.css */
+/* Import those styles via DeliveryOptions.css being co-located; here we add payment-specific styles */
+
+/* ── Stripe Payment Element mock ────────────────── */
+.stripe-mock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/sm);
+}
+
+/* Selected card form (blue border) */
+.stripe-card {
+  border: 1.5px solid #6772e5;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.stripe-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid var(--colors\/grey-10);
+}
+
+.stripe-card__header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stripe-card__header-title {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-m-action-m);
+  font-weight: 600;
+  color: var(--contrast);
+}
+
+.stripe-card__header-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stripe-card__header-right img {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
+.stripe-card__more-cards {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-s-action-s);
+  color: var(--contrast-variant);
+}
+
+/* Fields inside the card */
+.stripe-field {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--colors\/grey-10);
+  min-height: 48px;
+  gap: 8px;
+}
+
+.stripe-field:last-child {
+  border-bottom: none;
+}
+
+.stripe-field--link {
+  background: #f6f9fc;
+  gap: 8px;
+}
+
+.stripe-field__placeholder {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  color: var(--contrast-variant);
+  flex: 1;
+}
+
+.stripe-field__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.stripe-field-row {
+  display: flex;
+  border-bottom: 1px solid var(--colors\/grey-10);
+}
+
+.stripe-field--half {
+  flex: 1;
+  border-bottom: none;
+  padding: 12px 16px;
+}
+
+.stripe-field--half:first-child {
+  border-right: 1px solid var(--colors\/grey-10);
+}
+
+/* Payment method option rows */
+.stripe-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing\/m) var(--spacing\/m);
+  border: 1.5px solid var(--colors\/grey-10);
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  gap: 12px;
+}
+
+.stripe-option:hover {
+  border-color: var(--colors\/grey-20, #c8cdd2);
+}
+
+.stripe-option__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stripe-option__icon {
+  width: 32px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stripe-option__icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.stripe-option__label {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  color: var(--contrast);
+}
+
+.stripe-option__chevron {
+  color: var(--contrast-variant);
+  flex-shrink: 0;
+}
+
+/* ── Continue button ────────────────────────────── */
+.btn-payment-continue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-payment-continue img {
+  filter: brightness(0) invert(1);
+}
+
+/* ── Terms text ─────────────────────────────────── */
+.payment-terms {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-s-action-s);
+  line-height: var(--font\/font\/line-height\/small);
+  color: var(--contrast-variant);
+}
+
+.payment-terms a {
+  color: var(--contrast);
+  text-decoration: underline;
+}
