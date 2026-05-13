@@ -1,0 +1,40 @@
+/* ── Delivery type toggle (segmented control) ──────── */
+.delivery-type-toggle {
+  display: flex;
+  align-items: stretch;
+  background: var(--colors\/grey-05);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.delivery-type-toggle__option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 64px;
+  padding: var(--general\/m);
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.delivery-type-toggle__option--selected {
+  background: var(--tone, white);
+}
+
+.delivery-type-toggle__label {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-m-body-xl);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  padding-top: 4px;
+}
+
+/* ── Full-width save button variant ─────────────────── */
+.btn-save-continue--full {
+  align-self: stretch;
+}
