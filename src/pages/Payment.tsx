@@ -4,6 +4,7 @@ import Divider from '../components/Divider'
 import OrderSummary from '../components/OrderSummary'
 import { DELIVERY_OPTIONS } from '../types'
 import type { DeliverySelection } from '../types'
+import type { PrototypeFlow } from '../types'
 import './DeliveryOptions.css'
 import './Payment.css'
 
@@ -11,6 +12,8 @@ interface Props {
   onBackToAddress: () => void
   onBackToDelivery: () => void
   deliverySelection: DeliverySelection
+  prototypeFlow: PrototypeFlow
+  onPrototypeFlowChange: (flow: PrototypeFlow) => void
 }
 
 const PAYMENT_OPTIONS = [
@@ -109,12 +112,18 @@ function PaymentOptionIcon({ id }: { id: PaymentOptionId }) {
   )
 }
 
-export default function Payment({ onBackToAddress, onBackToDelivery, deliverySelection }: Props) {
+export default function Payment({
+  onBackToAddress,
+  onBackToDelivery,
+  deliverySelection,
+  prototypeFlow,
+  onPrototypeFlowChange,
+}: Props) {
   const delivery = DELIVERY_OPTIONS[deliverySelection]
 
   return (
     <div className="page">
-      <Header onBack={onBackToDelivery} />
+      <Header onBack={onBackToDelivery} prototypeFlow={prototypeFlow} onPrototypeFlowChange={onPrototypeFlowChange} />
 
       <div className="delivery-layout">
 

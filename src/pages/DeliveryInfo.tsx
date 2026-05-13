@@ -3,17 +3,20 @@ import Footer from '../components/Footer'
 import Divider from '../components/Divider'
 import InputField from '../components/InputField'
 import OrderSummary from '../components/OrderSummary'
+import type { PrototypeFlow } from '../types'
 import './DeliveryInfo.css'
 
 interface Props {
   onBack: () => void
   onContinue: () => void
+  prototypeFlow: PrototypeFlow
+  onPrototypeFlowChange: (flow: PrototypeFlow) => void
 }
 
-export default function DeliveryInfo({ onBack, onContinue }: Props) {
+export default function DeliveryInfo({ onBack, onContinue, prototypeFlow, onPrototypeFlowChange }: Props) {
   return (
     <div className="page">
-      <Header onBack={onBack} />
+      <Header onBack={onBack} prototypeFlow={prototypeFlow} onPrototypeFlowChange={onPrototypeFlowChange} />
 
       <div className="delivery-layout">
 

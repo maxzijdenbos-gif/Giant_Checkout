@@ -1,3 +1,29 @@
+.prototype-bar {
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 var(--general\/m);
+  border-bottom: 1px solid var(--colors\/grey-10);
+  background: var(--tone);
+  position: relative;
+  z-index: 11;
+}
+
+.prototype-bar__select {
+  width: 156px;
+  height: 24px;
+  color: var(--contrast);
+  background: transparent;
+  border: none;
+  font-family: var(--font\/family\/action);
+  font-weight: 600;
+  font-size: var(--font\/size\/body-s-action-s);
+  line-height: var(--font\/font\/line-height\/xsmall);
+  cursor: pointer;
+}
+
 .header {
   height: 64px;
   flex-shrink: 0;

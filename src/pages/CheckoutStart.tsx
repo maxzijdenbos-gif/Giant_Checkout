@@ -1,10 +1,13 @@
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { imgCheck } from '../assets'
+import type { PrototypeFlow } from '../types'
 import './CheckoutStart.css'
 
 interface Props {
   onGuestCheckout: () => void
+  prototypeFlow: PrototypeFlow
+  onPrototypeFlowChange: (flow: PrototypeFlow) => void
 }
 
 const BENEFITS = [
@@ -13,10 +16,10 @@ const BENEFITS = [
   'Register your bikes',
 ]
 
-export default function CheckoutStart({ onGuestCheckout }: Props) {
+export default function CheckoutStart({ onGuestCheckout, prototypeFlow, onPrototypeFlowChange }: Props) {
   return (
     <div className="page">
-      <Header />
+      <Header prototypeFlow={prototypeFlow} onPrototypeFlowChange={onPrototypeFlowChange} />
 
       <main className="checkout-start__main">
         <h1 className="checkout-start__title">Choose how you would like to check out</h1>

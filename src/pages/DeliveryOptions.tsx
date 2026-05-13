@@ -6,6 +6,7 @@ import OrderSummary from '../components/OrderSummary'
 import StorePickerModal from '../components/StorePickerModal'
 import { imgDelivery32, imgPen } from '../assets'
 import type { DeliverySelection } from '../types'
+import type { PrototypeFlow } from '../types'
 import './DeliveryOptions.css'
 
 interface Props {
@@ -13,14 +14,23 @@ interface Props {
   onContinue: () => void
   deliverySelection: DeliverySelection
   onDeliveryChange: (s: DeliverySelection) => void
+  prototypeFlow: PrototypeFlow
+  onPrototypeFlowChange: (flow: PrototypeFlow) => void
 }
 
-export default function DeliveryOptions({ onBack, onContinue, deliverySelection, onDeliveryChange }: Props) {
+export default function DeliveryOptions({
+  onBack,
+  onContinue,
+  deliverySelection,
+  onDeliveryChange,
+  prototypeFlow,
+  onPrototypeFlowChange,
+}: Props) {
   const [showStorePicker, setShowStorePicker] = useState(false)
 
   return (
     <div className="page">
-      <Header onBack={onBack} />
+      <Header onBack={onBack} prototypeFlow={prototypeFlow} onPrototypeFlowChange={onPrototypeFlowChange} />
 
       <div className="delivery-layout">
 
