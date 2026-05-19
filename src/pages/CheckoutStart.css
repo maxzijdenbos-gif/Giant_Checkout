@@ -53,34 +53,6 @@
 }
 
 /* Shared button styles */
-.btn {
-  height: 40px;
-  width: 100%;
-  padding: 0 var(--spacing\/sm);
-  border-radius: var(--general\/ml);
-  border: 2px solid transparent;
-  font-family: var(--font\/family\/action);
-  font-weight: 800;
-  font-size: var(--font\/size\/body-s-action-s);
-  line-height: var(--font\/font\/line-height\/xsmall);
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: opacity 0.15s;
-}
-
-.btn:hover { opacity: 0.85; }
-
-.btn--primary {
-  background: var(--colors\/primary);
-  color: var(--colors\/white);
-}
-
-.btn--outline {
-  background: transparent;
-  border-color: var(--colors\/primary);
-  color: var(--colors\/primary);
-}
-
 /* Benefits */
 .option-card__benefits {
   display: flex;

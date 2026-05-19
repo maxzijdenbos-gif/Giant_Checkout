@@ -6,7 +6,7 @@ import InputField from '../components/InputField'
 import SelectField from '../components/SelectField'
 import OrderSummary from '../components/OrderSummary'
 import StorePickerModal from '../components/StorePickerModal'
-import { imgDelivery32, imgStoreIcon, imgAutofill } from '../assets'
+import { imgDelivery32, imgStoreIcon } from '../assets'
 import type { PrototypeFlow } from '../types'
 import './DeliveryInfo.css'
 import './DeliveryOptions.css'
@@ -113,14 +113,7 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
     <div className="page">
       <Header onBack={onBack} prototypeFlow={prototypeFlow} onPrototypeFlowChange={onPrototypeFlowChange} />
 
-      {/* Autofill test button */}
-      <button className="autofill-btn" onClick={handleAutofill} aria-label="Autofill form with test data">
-        <div className="autofill-btn__img-wrap">
-          <img src={imgAutofill} alt="" className="autofill-btn__img" />
-        </div>
-        <span className="autofill-btn__label">Autofill</span>
-        <div className="autofill-btn__badge" aria-hidden="true">T</div>
-      </button>
+      <button className="btn btn--primary autofill-btn" onClick={handleAutofill}>Autolayout</button>
 
       <div className="delivery-layout">
 

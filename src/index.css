@@ -41,3 +41,55 @@ body {
   height: 100%;
   object-fit: contain;
 }
+
+/* Shared button component */
+.btn {
+  height: 48px;
+  width: 100%;
+  padding: 0 var(--general\/m);
+  border-radius: var(--general\/ml);
+  border: none;
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/xsmall);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn--primary {
+  background: var(--colors\/primary);
+  color: var(--colors\/white);
+}
+
+.btn--primary:hover {
+  background: var(--giant\/velocity-blue);
+}
+
+.btn--primary:active {
+  background: var(--colors\/primary);
+}
+
+.btn--primary:disabled {
+  background: var(--colors\/grey-05);
+  border: 0.4px solid var(--colors\/grey-10);
+  color: var(--contrast-variant);
+  cursor: default;
+}
+
+.btn--outline {
+  background: transparent;
+  border: 2px solid var(--colors\/primary);
+  color: var(--colors\/primary);
+}
+
+.btn--outline:hover {
+  opacity: 0.75;
+}
+
+.btn--outline:disabled {
+  border-color: var(--colors\/grey-10);
+  color: var(--contrast-variant);
+  cursor: default;
+}
