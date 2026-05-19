@@ -13,6 +13,7 @@ interface InputFieldProps {
   onChange?: (value: string) => void
   // External error flag (e.g. triggered on form submit attempt)
   error?: boolean
+  dropdown?: boolean
 }
 
 export default function InputField({
