@@ -8,13 +8,29 @@ interface InputFieldProps {
   locked?: boolean
   placeholder?: string
   defaultValue?: string
+  // Controlled mode — provide both to opt in
+  value?: string
+  onChange?: (value: string) => void
+  // External error flag (e.g. triggered on form submit attempt)
+  error?: boolean
 }
 
-export default function InputField({ label, optional, type = 'text', locked, placeholder, defaultValue }: InputFieldProps) {
-  const [value, setValue] = useState(defaultValue ?? '')
+export default function InputField({
+  label, optional, type = 'text', locked, placeholder, defaultValue,
+  value: controlledValue, onChange, error: externalError,
+}: InputFieldProps) {
+  const isControlled = controlledValue !== undefined
+  const [internalValue, setInternalValue] = useState(defaultValue ?? '')
   const [touched, setTouched] = useState(false)
 
-  const hasError = !optional && !locked && touched && value.trim() === ''
+  const value = isControlled ? controlledValue : internalValue
+
+  function handleChange(v: string) {
+    if (isControlled) onChange?.(v)
+    else setInternalValue(v)
+  }
+
+  const hasError = externalError === true || (!optional && !locked && touched && value.trim() === '')
 
   return (
     <div className={`input-field${locked ? ' input-field--locked' : ''}${hasError ? ' input-field--error' : ''}`}>
@@ -30,7 +46,7 @@ export default function InputField({ label, optional, type = 'text', locked, pla
             value={value}
             disabled={locked}
             placeholder={placeholder}
-            onChange={e => setValue(e.target.value)}
+            onChange={e => handleChange(e.target.value)}
             onBlur={() => setTouched(true)}
           />
           {locked && (
@@ -43,7 +59,7 @@ export default function InputField({ label, optional, type = 'text', locked, pla
         </div>
         {hasError && (
           <div className="input-field__error">
-            <span className="input-field__error-text">Error message</span>
+            <span className="input-field__error-text">This field is required</span>
           </div>
         )}
       </div>

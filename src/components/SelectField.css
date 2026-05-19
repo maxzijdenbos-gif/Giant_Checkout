@@ -1,0 +1,25 @@
+.input-field__select {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.input-field__select--empty {
+  color: var(--contrast-variant);
+}
+
+.input-field__chevron {
+  flex-shrink: 0;
+  color: var(--contrast);
+  pointer-events: none;
+}

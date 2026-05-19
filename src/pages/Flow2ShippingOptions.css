@@ -1,0 +1,65 @@
+/* ── Address review card ─────────────────────────── */
+.address-review-card {
+  cursor: default;
+}
+
+.address-review-card__lines {
+  display: flex;
+  flex-direction: column;
+}
+
+.address-review-card__lines p,
+.address-review-card__lines br {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.address-review-card__billing-label {
+  font-family: var(--font\/family\/body);
+  font-weight: 700;
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.address-review-card__edit {
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/xsmall);
+  text-transform: uppercase;
+  color: var(--contrast);
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* ── Icon container in selectable cards ──────────── */
+.selectable-card__icon-wrap {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selectable-card__icon-wrap img {
+  display: block;
+}
+
+/* ── Icon container in delivery type toggle ──────── */
+.delivery-type-toggle__icon-wrap {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delivery-type-toggle__icon-wrap img {
+  display: block;
+}

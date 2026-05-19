@@ -30,6 +30,9 @@ export const imgMapPreview = 'https://www.figma.com/api/mcp/asset/928c4b5c-82e3-
 // ── Edit / navigation icons ────────────────────────
 export const imgPen = 'https://www.figma.com/api/mcp/asset/8482dad4-48a9-45b3-923e-7fd8eb4e2968'
 
+// ── Autofill test button ───────────────────────────
+export const imgAutofill = 'https://www.figma.com/api/mcp/asset/01b1c44e-4312-483a-835a-bc0bf377155a'
+
 // ── Payment page icons ─────────────────────────────
 export const imgStripeIcon    = 'https://www.figma.com/api/mcp/asset/e7fb8220-ee51-45cb-8eb9-aebadaf8d003'
 export const imgLinkIcon      = 'https://www.figma.com/api/mcp/asset/edff5318-689d-4223-9e96-ab0dab8dbeee'
