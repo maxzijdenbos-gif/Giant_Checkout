@@ -1,10 +1,15 @@
-/* ── Delivery type toggle (segmented control) ──────── */
+/* ── Checkout section (sub-group within a step) ─────── */
+.checkout-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/sm);
+}
+
+/* ── Delivery type toggle ─────────────────────────── */
 .delivery-type-toggle {
   display: flex;
   align-items: stretch;
-  background: var(--colors\/grey-05);
-  border-radius: 8px;
-  padding: 8px;
+  gap: var(--spacing\/sm);
 }
 
 .delivery-type-toggle__option {
@@ -12,17 +17,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: var(--general\/xxs);
   min-height: 64px;
-  padding: var(--general\/m);
-  border: none;
-  border-radius: 4px;
-  background: transparent;
+  padding: 8px;
+  border: 1px solid var(--colors\/grey-30);
+  border-radius: var(--spacing\/xs);
+  background: var(--colors\/white);
   cursor: pointer;
 }
 
 .delivery-type-toggle__option--selected {
-  background: var(--tone, white);
+  border: 2px solid var(--colors\/primary);
 }
 
 .delivery-type-toggle__label {
@@ -34,7 +39,69 @@
   padding-top: 4px;
 }
 
-/* ── Full-width save button variant ─────────────────── */
+/* ── Form row variants ────────────────────────────── */
+.form-row {
+  align-items: flex-start;
+}
+
+.form-row--address > *:first-child {
+  flex: 2;
+}
+
+.form-col--tight {
+  gap: 12px;
+}
+
+/* ── Checkboxes ───────────────────────────────────── */
+.form-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/xs);
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing\/xxs);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.form-checkbox--top-aligned {
+  align-items: flex-start;
+}
+
+.form-checkbox__box {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin: 3px;
+  border: 1px solid var(--contrast-variant);
+  background: var(--colors\/white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-checkbox__box--checked {
+  background: var(--giant\/velocity-blue);
+  border-color: var(--giant\/velocity-blue);
+}
+
+.form-checkbox__label {
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/small);
+  color: var(--contrast);
+  flex: 1;
+}
+
+/* ── Full-width continue button ───────────────────── */
 .btn-save-continue--full {
   align-self: stretch;
 }

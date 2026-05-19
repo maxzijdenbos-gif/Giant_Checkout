@@ -11,6 +11,8 @@
   --colors\/white:         #ffffff;
   --colors\/grey-05:       #f2f2f5;
   --colors\/grey-10:       #dedee0;
+  --colors\/grey-30:       #bcbcbc;
+  --giant\/velocity-blue:  #0050fc;
 
   /* Semantic color aliases */
   --contrast:              #000000;   /* primary text on light bg    */
