@@ -8,6 +8,6 @@ export const DELIVERY_OPTIONS = {
 } as const
 
 export const PROTOTYPE_FLOWS: Array<{ id: PrototypeFlow; label: string }> = [
-  { id: 'current-checkout', label: 'Checkout flow 1' },
-  { id: 'new-checkout', label: 'Checkout flow 2' },
+  { id: 'new-checkout',     label: 'Compact flow' },
+  { id: 'current-checkout', label: 'Regular flow' },
 ]

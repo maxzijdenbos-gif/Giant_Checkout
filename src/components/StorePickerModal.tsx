@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { imgMapPreview, imgStoreIcon } from '../assets'
 import './StorePickerModal.css'
 
-interface Store {
+export interface Store {
   id: string
   name: string
   availability: string
@@ -11,7 +11,7 @@ interface Store {
   distance: string
 }
 
-const STORES: Store[] = [
+export const STORES: Store[] = [
   {
     id: 'gogo',
     name: 'GoGo Gone',

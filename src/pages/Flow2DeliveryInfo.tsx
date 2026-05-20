@@ -5,7 +5,7 @@ import Divider from '../components/Divider'
 import InputField from '../components/InputField'
 import SelectField from '../components/SelectField'
 import OrderSummary from '../components/OrderSummary'
-import StorePickerModal from '../components/StorePickerModal'
+import LocationSearchField, { type LocationSuggestion } from '../components/LocationSearchField'
 import { imgDelivery32, imgStoreIcon } from '../assets'
 import type { PrototypeFlow } from '../types'
 import './DeliveryInfo.css'
@@ -13,6 +13,13 @@ import './DeliveryOptions.css'
 import './Flow2DeliveryInfo.css'
 
 type DeliveryType = 'delivery' | 'store'
+
+const NY_SUGGESTIONS: LocationSuggestion[] = [
+  { label: 'New York, NY', sublabel: 'United States' },
+  { label: 'New York', sublabel: 'United States' },
+  { label: 'New York Mills, MN', sublabel: 'United States' },
+  { label: 'New York, TX', sublabel: 'Netherlands' },
+]
 
 type AddressForm = {
   firstName: string; prefix: string; lastName: string
@@ -66,11 +73,12 @@ interface Props {
   onContinueToPayment: () => void
   prototypeFlow: PrototypeFlow
   onPrototypeFlowChange: (flow: PrototypeFlow) => void
+  deliveryType: DeliveryType
+  onDeliveryTypeChange: (type: DeliveryType) => void
 }
 
-export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPayment, prototypeFlow, onPrototypeFlowChange }: Props) {
-  const [deliveryType, setDeliveryType] = useState<DeliveryType>('delivery')
-  const [showStorePicker, setShowStorePicker] = useState(false)
+export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPayment, prototypeFlow, onPrototypeFlowChange, deliveryType, onDeliveryTypeChange }: Props) {
+  const [selectedLocation, setSelectedLocation] = useState<LocationSuggestion | null>(null)
   const [billingAddressSame, setBillingAddressSame] = useState(true)
   const [newsletter, setNewsletter] = useState(false)
   const [validated, setValidated] = useState(false)
@@ -113,7 +121,14 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
     <div className="page">
       <Header onBack={onBack} prototypeFlow={prototypeFlow} onPrototypeFlowChange={onPrototypeFlowChange} />
 
-      <button className="btn btn--primary autofill-btn" onClick={handleAutofill}>Autolayout</button>
+      {deliveryType === 'delivery' && (
+        <div className="autofill-btn">
+          <button className="btn btn--primary autofill-btn__btn" onClick={handleAutofill}>
+            Autocomplete
+          </button>
+          <span className="autofill-btn__badge" aria-hidden="true">T</span>
+        </div>
+      )}
 
       <div className="delivery-layout">
 
@@ -131,7 +146,7 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
                 <div className="delivery-type-toggle">
                   <button
                     className={`delivery-type-toggle__option${deliveryType === 'delivery' ? ' delivery-type-toggle__option--selected' : ''}`}
-                    onClick={() => setDeliveryType('delivery')}
+                    onClick={() => onDeliveryTypeChange('delivery')}
                   >
                     <div className="delivery-type-toggle__icon-wrap">
                       <img src={imgDelivery32} alt="" width="32" height="32" />
@@ -140,18 +155,29 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
                   </button>
                   <button
                     className={`delivery-type-toggle__option${deliveryType === 'store' ? ' delivery-type-toggle__option--selected' : ''}`}
-                    onClick={() => {
-                      setDeliveryType('store')
-                      setShowStorePicker(true)
-                    }}
+                    onClick={() => onDeliveryTypeChange('store')}
                   >
                     <div className="delivery-type-toggle__icon-wrap">
-                      <img src={imgStoreIcon} alt="" width="32" height="32" />
+                      <img src={imgStoreIcon} alt="" width="22" height="20" />
                     </div>
                     <span className="delivery-type-toggle__label">Pick up in store</span>
                   </button>
                 </div>
               </div>
+
+              {deliveryType === 'store' && (
+                <div className="checkout-section">
+                  <div style={{ width: '50%' }}>
+                    <LocationSearchField
+                      label="Enter address or postal code"
+                      placeholder="New York"
+                      suggestions={NY_SUGGESTIONS}
+                      onSelect={s => setSelectedLocation(s)}
+                      selectedValue={selectedLocation?.label}
+                    />
+                  </div>
+                </div>
+              )}
 
               {deliveryType === 'delivery' && (
                 <>
@@ -302,8 +328,9 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
               <button
                 className="btn-save-continue"
                 onClick={deliveryType === 'delivery' ? handleContinue : onContinueToPayment}
+                disabled={deliveryType === 'store' && !selectedLocation}
               >
-                {deliveryType === 'delivery' ? 'Continue' : 'Continue to payment'}
+                {deliveryType === 'delivery' ? 'Continue' : 'Find store'}
               </button>
             </section>
 
@@ -325,12 +352,6 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
 
       <Footer variant="dark" />
 
-      {showStorePicker && (
-        <StorePickerModal
-          onClose={() => setShowStorePicker(false)}
-          onSelect={() => setShowStorePicker(false)}
-        />
-      )}
     </div>
   )
 }

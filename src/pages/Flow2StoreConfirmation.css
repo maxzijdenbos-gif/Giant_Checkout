@@ -1,0 +1,81 @@
+.store-confirmation-card {
+  background: var(--colors\/white);
+  border: 2px solid var(--colors\/primary);
+  border-radius: var(--spacing\/xs);
+  padding: var(--spacing\/m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/sm);
+  width: 100%;
+}
+
+.store-confirmation-card__name {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-m-body-xl);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  margin: 0;
+}
+
+.store-confirmation-card__availability {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/xxs);
+}
+
+.store-confirmation-card__avail-primary {
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.store-confirmation-card__avail-detail {
+  display: none;
+}
+
+.store-confirmation-card__address {
+  display: flex;
+  flex-direction: column;
+}
+
+.store-confirmation-card__address p {
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  margin: 0;
+}
+
+.store-confirmation-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing\/s);
+}
+
+.store-confirmation-card__action-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--contrast);
+  flex-shrink: 0;
+}
+
+.store-confirmation-card__action-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/xsmall);
+  text-transform: uppercase;
+  color: var(--contrast);
+}
+
+.store-confirmation-card__action-link:hover {
+  opacity: 0.7;
+}

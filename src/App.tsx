@@ -3,22 +3,26 @@ import CheckoutStart from './pages/CheckoutStart'
 import DeliveryInfo from './pages/DeliveryInfo'
 import DeliveryOptions from './pages/DeliveryOptions'
 import Payment from './pages/Payment'
+import Flow2Payment from './pages/Flow2Payment'
 import Flow2DeliveryInfo from './pages/Flow2DeliveryInfo'
 import Flow2ShippingOptions from './pages/Flow2ShippingOptions'
+import Flow2StoreConfirmation from './pages/Flow2StoreConfirmation'
 import type { DeliverySelection } from './types'
 import type { PrototypeFlow } from './types'
 
-type Page = 'checkout-start' | 'delivery' | 'delivery-options' | 'payment' | 'flow2-delivery' | 'flow2-shipping'
+type Page = 'checkout-start' | 'delivery' | 'delivery-options' | 'payment' | 'flow2-delivery' | 'flow2-shipping' | 'flow2-store-selection'
 
 export default function App() {
   const [page, setPage] = useState<Page>('checkout-start')
   const [deliverySelection, setDeliverySelection] = useState<DeliverySelection>('store')
-  const [prototypeFlow, setPrototypeFlow] = useState<PrototypeFlow>('current-checkout')
+  const [prototypeFlow, setPrototypeFlow] = useState<PrototypeFlow>('new-checkout')
+  const [flow2DeliveryType, setFlow2DeliveryType] = useState<'delivery' | 'store'>('delivery')
 
   function handlePrototypeFlowChange(flow: PrototypeFlow) {
     setPrototypeFlow(flow)
     setPage('checkout-start')
     setDeliverySelection('store')
+    setFlow2DeliveryType('delivery')
   }
 
   const prototypeSwitcherProps = {
@@ -27,12 +31,22 @@ export default function App() {
   }
 
   switch (page) {
+    case 'flow2-store-selection':
+      return (
+        <Flow2StoreConfirmation
+          onBack={() => { setFlow2DeliveryType('store'); setPage('flow2-delivery') }}
+          onContinue={() => setPage('payment')}
+          {...prototypeSwitcherProps}
+        />
+      )
     case 'flow2-delivery':
       return (
         <Flow2DeliveryInfo
           onBack={() => setPage('checkout-start')}
           onContinue={() => setPage('flow2-shipping')}
-          onContinueToPayment={() => setPage('payment')}
+          onContinueToPayment={() => setPage('flow2-store-selection')}
+          deliveryType={flow2DeliveryType}
+          onDeliveryTypeChange={setFlow2DeliveryType}
           {...prototypeSwitcherProps}
         />
       )
@@ -47,10 +61,19 @@ export default function App() {
         />
       )
     case 'payment':
+      if (prototypeFlow === 'new-checkout') {
+        return (
+          <Flow2Payment
+            onBack={() => setPage(flow2DeliveryType === 'store' ? 'flow2-store-selection' : 'flow2-shipping')}
+            deliverySelection={deliverySelection}
+            {...prototypeSwitcherProps}
+          />
+        )
+      }
       return (
         <Payment
-          onBackToAddress={() => setPage(prototypeFlow === 'new-checkout' ? 'flow2-delivery' : 'delivery')}
-          onBackToDelivery={() => setPage(prototypeFlow === 'new-checkout' ? 'flow2-shipping' : 'delivery-options')}
+          onBackToAddress={() => setPage('delivery')}
+          onBackToDelivery={() => setPage('delivery-options')}
           deliverySelection={deliverySelection}
           {...prototypeSwitcherProps}
         />

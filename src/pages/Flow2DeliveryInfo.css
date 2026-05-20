@@ -106,11 +106,48 @@
   align-self: stretch;
 }
 
-/* ── Autolayout test button (floating) ─────────────── */
+/* ── Autofill test button (floating, draggable) ─────── */
+@keyframes float-infinity {
+  0%   { transform: translate(0px,    0px);  }
+  12.5%{ transform: translate(4px,    3px);  }
+  25%  { transform: translate(6px,    0px);  }
+  37.5%{ transform: translate(4px,   -3px);  }
+  50%  { transform: translate(0px,    0px);  }
+  62.5%{ transform: translate(-4px,   3px);  }
+  75%  { transform: translate(-6px,   0px);  }
+  87.5%{ transform: translate(-4px,  -3px);  }
+  100% { transform: translate(0px,    0px);  }
+}
+
 .autofill-btn {
   position: fixed;
-  left: 20px;
-  top: 220px;
+  top: 368px;
+  left: 32px;
   z-index: 100;
+  width: fit-content;
+  animation: float-infinity 8s linear infinite;
+}
+
+.autofill-btn__btn {
   width: auto;
+}
+
+.autofill-btn__badge {
+  position: absolute;
+  top: -10px;
+  left: -9px;
+  width: 19px;
+  height: 19px;
+  background: #ffca05;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/xsmall);
+  color: #000000;
+  text-transform: uppercase;
+  pointer-events: none;
 }

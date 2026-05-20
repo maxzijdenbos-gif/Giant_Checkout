@@ -2,25 +2,25 @@
 // Re-run get_design_context on the relevant frame to refresh them.
 
 // ── Shared UI icons ────────────────────────────────
-export const imgLogo         = 'https://www.figma.com/api/mcp/asset/b0e11b7a-eddd-49a9-afc6-9d1a3c3ed161'
-export const imgChevronLeft  = 'https://www.figma.com/api/mcp/asset/4679a459-188c-42f7-8b47-d4e9e8672274'
-export const imgComment      = 'https://www.figma.com/api/mcp/asset/65634860-3e54-4a9e-af4f-99332c4f1cb4'
-export const imgCheck        = 'https://www.figma.com/api/mcp/asset/29a819a0-8563-44e2-9377-7fcba8de0e78'
-export const imgChevronDown  = 'https://www.figma.com/api/mcp/asset/e3c8b2dc-2838-480a-a672-ddb3efdfa815'
-export const imgTagIcon      = 'https://www.figma.com/api/mcp/asset/904a0d56-a6ef-4b41-aa8c-8ade39f1dc6c'
-export const imgTagHole      = 'https://www.figma.com/api/mcp/asset/f78b397b-4c59-4454-9d68-8c5ebc08df42'
-export const imgInfoDot      = 'https://www.figma.com/api/mcp/asset/2bbc044b-d814-40c8-97ac-c12da630e38a'
-export const imgInfoLine     = 'https://www.figma.com/api/mcp/asset/3801dc0c-2f05-4c27-b0e6-c71bf26e08c8'
-export const imgInfoCircle   = 'https://www.figma.com/api/mcp/asset/62cca20a-80a6-4a92-8d83-a549e4b657d8'
+export const imgLogo         = 'https://www.figma.com/api/mcp/asset/1928547e-8c5d-4ba0-933a-ed70282cb732'
+export const imgChevronLeft  = 'https://www.figma.com/api/mcp/asset/cd790895-ab60-44bc-9873-03a1a0401092'
+export const imgComment      = 'https://www.figma.com/api/mcp/asset/e5d1fb76-bdf7-4958-b8e0-b3cec3cefc29'
+export const imgCheck        = 'https://www.figma.com/api/mcp/asset/952c8bc0-948a-484e-b804-552ec258f916'
+export const imgChevronDown  = 'https://www.figma.com/api/mcp/asset/9858e090-101a-4de8-85cb-4bd0f9cd716b'
+export const imgTagIcon      = 'https://www.figma.com/api/mcp/asset/d8577595-c164-47d8-87a4-aa7295837afd'
+export const imgTagHole      = 'https://www.figma.com/api/mcp/asset/0cc02fce-0cc0-4415-a8eb-817ce17385e4'
+export const imgInfoDot      = 'https://www.figma.com/api/mcp/asset/969c555b-f637-4572-923b-6c9ce1a97ad3'
+export const imgInfoLine     = 'https://www.figma.com/api/mcp/asset/2aecfb00-f1bf-4e09-8dfa-20d0fe321ba6'
+export const imgInfoCircle   = 'https://www.figma.com/api/mcp/asset/646923ef-5629-4e2d-ad0a-a0444c67f5c6'
 
 // ── Payment icons ──────────────────────────────────
-export const imgAmex        = 'https://www.figma.com/api/mcp/asset/34e7ab32-672e-4748-862b-004087490bbc'
-export const imgDinersClub  = 'https://www.figma.com/api/mcp/asset/a6793fe0-7bd4-4424-911a-3faabf2d1193'
-export const imgDiscover    = 'https://www.figma.com/api/mcp/asset/65d24238-6293-403f-9139-9d542ef8a96a'
-export const imgElo         = 'https://www.figma.com/api/mcp/asset/4862e58c-5d8c-4c3f-83a6-7a07e3316ceb'
-export const imgMastercard  = 'https://www.figma.com/api/mcp/asset/47c7d4ed-36ae-4105-94ac-c613811efbd6'
-export const imgVisa        = 'https://www.figma.com/api/mcp/asset/cffc8b04-eac4-4b62-9344-99f605498049'
-export const imgUnionPay    = 'https://www.figma.com/api/mcp/asset/50392a7f-8a07-4c51-b956-bee272754bf0'
+export const imgAmex        = 'https://www.figma.com/api/mcp/asset/0345bd0b-b23c-41cd-a62c-44630af9f0e6'
+export const imgDinersClub  = 'https://www.figma.com/api/mcp/asset/4e15992d-f2d8-456c-adc3-5f292907de39'
+export const imgDiscover    = 'https://www.figma.com/api/mcp/asset/cbd374aa-f443-4427-8baf-c3b4c4b16763'
+export const imgElo         = 'https://www.figma.com/api/mcp/asset/7a492da4-52d6-4a35-a9f5-b156d5189eaf'
+export const imgMastercard  = 'https://www.figma.com/api/mcp/asset/a23afe97-e620-4283-827f-cf49b2b78579'
+export const imgVisa        = 'https://www.figma.com/api/mcp/asset/fdaf0b50-541e-4e78-a6c0-fe9f0d0b4c40'
+export const imgUnionPay    = 'https://www.figma.com/api/mcp/asset/673023b1-9776-41f2-865b-855e37549a96'
 
 // ── Delivery options icons ─────────────────────────
 export const imgDelivery32 = 'https://www.figma.com/api/mcp/asset/050c8d17-e277-4516-bdb6-37ae3d07396b'
@@ -42,7 +42,7 @@ export const imgAffirmIcon    = 'https://www.figma.com/api/mcp/asset/122e53d3-58
 export const imgArrowRight    = 'https://www.figma.com/api/mcp/asset/39fe3f09-afd2-4328-8922-4cd8d4488a24'
 
 // ── Product images (delivery page order summary) ───
-export const imgProductPropel  = 'https://www.figma.com/api/mcp/asset/4abcacf5-1599-432e-b94b-4634715f52ef'
-export const imgProductAnthem  = 'https://www.figma.com/api/mcp/asset/665a60e2-4a54-43e1-aba6-987319c9ef0c'
-export const imgProductAurea   = 'https://www.figma.com/api/mcp/asset/69f5c6a3-419d-4242-ae2b-4fccb68eff78'
-export const imgProductRevolt  = 'https://www.figma.com/api/mcp/asset/0ed63290-2afc-4f1c-bc93-372e2f7f4bd6'
+export const imgProductPropel  = 'https://www.figma.com/api/mcp/asset/61af1832-e450-4d9f-ada9-2b2024c68077'
+export const imgProductAnthem  = 'https://www.figma.com/api/mcp/asset/d335a941-bf06-402e-a094-9d77d3410cfe'
+export const imgProductAurea   = 'https://www.figma.com/api/mcp/asset/194d0d2d-a29d-4a46-a98c-e323dec45d42'
+export const imgProductRevolt  = 'https://www.figma.com/api/mcp/asset/5d711ecb-2fdb-4b07-82ed-3d3cdf546035'

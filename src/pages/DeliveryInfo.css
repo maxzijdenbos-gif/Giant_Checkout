@@ -109,6 +109,13 @@
   opacity: 0.9;
 }
 
+.btn-save-continue:disabled {
+  background: var(--colors\/grey-05);
+  border: 0.4px solid var(--colors\/grey-10);
+  color: var(--contrast-variant);
+  cursor: default;
+}
+
 /* ── Responsive ────────────────────────────────────── */
 @media (max-width: 1100px) {
   .delivery-left {

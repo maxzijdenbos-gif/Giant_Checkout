@@ -318,3 +318,98 @@
   color: var(--contrast);
   text-decoration: underline;
 }
+
+/* ── Flow 2: Delivery summary line (name + price) ─── */
+.delivery-summary__name-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+/* ── Flow 2: Stripe element with labeled fields ───── */
+.stripe-card--flow2 {
+  border-color: var(--colors\/primary, #06038d);
+}
+
+.stripe-card__header--flow2 {
+  border-bottom: none;
+  padding: 14px 16px 12px;
+}
+
+.stripe-link-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 12px;
+}
+
+.stripe-link-row__text {
+  flex: 1;
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-m-action-m);
+  font-weight: 700;
+  color: var(--contrast-variant);
+  white-space: nowrap;
+}
+
+.stripe-card__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px 16px;
+}
+
+.stripe-labeled-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stripe-labeled-field__label {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-m-action-m);
+  color: #30313d;
+  line-height: var(--font\/font\/line-height\/small);
+}
+
+.stripe-labeled-field__input {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  background: white;
+  gap: 8px;
+}
+
+.stripe-labeled-field__placeholder {
+  flex: 1;
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  color: #77787d;
+  line-height: var(--font\/font\/line-height\/medium);
+}
+
+.stripe-field-row-labeled {
+  display: flex;
+  gap: 12px;
+}
+
+.stripe-field-row-labeled .stripe-labeled-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.stripe-card__brands-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.payment-brand--sm {
+  width: 24px;
+  height: 16px;
+  flex: 0 0 24px;
+}
