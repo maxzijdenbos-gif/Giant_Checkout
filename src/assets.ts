@@ -23,8 +23,8 @@ export const imgVisa        = 'https://www.figma.com/api/mcp/asset/fdaf0b50-541e
 export const imgUnionPay    = 'https://www.figma.com/api/mcp/asset/673023b1-9776-41f2-865b-855e37549a96'
 
 // ── Delivery options icons ─────────────────────────
-export const imgDelivery32 = 'https://www.figma.com/api/mcp/asset/050c8d17-e277-4516-bdb6-37ae3d07396b'
-export const imgStoreIcon  = 'https://www.figma.com/api/mcp/asset/63d066c9-ce00-40b2-84ed-0e28fea819be'
+export const imgDelivery32 = 'https://www.figma.com/api/mcp/asset/90a7f7de-c1d8-43b2-ae25-e5dd62db95d2'
+export const imgStoreIcon  = 'https://www.figma.com/api/mcp/asset/7b708bef-8c76-4b40-a0d0-a9f08ad7d640'
 export const imgMapPreview = 'https://www.figma.com/api/mcp/asset/928c4b5c-82e3-49d2-8521-18ca515aa479'
 
 // ── Edit / navigation icons ────────────────────────
