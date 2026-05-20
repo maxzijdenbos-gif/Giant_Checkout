@@ -4,7 +4,6 @@ import Footer from '../components/Footer'
 import Divider from '../components/Divider'
 import OrderSummary from '../components/OrderSummary'
 import StorePickerModal, { STORES } from '../components/StorePickerModal'
-import { imgDelivery32, imgStoreIcon } from '../assets'
 import type { PrototypeFlow } from '../types'
 import './DeliveryInfo.css'
 import './DeliveryOptions.css'
@@ -43,13 +42,22 @@ export default function Flow2StoreConfirmation({ onBack, onContinue, prototypeFl
                 <div className="delivery-type-toggle">
                   <button className="delivery-type-toggle__option" onClick={onBack}>
                     <div className="delivery-type-toggle__icon-wrap">
-                      <img src={imgDelivery32} alt="" width="32" height="32" />
+                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <rect x="2" y="9" width="19" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+                        <path d="M21 14h5.5l2.5 4.5V22h-8V14z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+                        <circle cx="9" cy="25" r="2.5" stroke="currentColor" strokeWidth="1.5"/>
+                        <circle cx="24" cy="25" r="2.5" stroke="currentColor" strokeWidth="1.5"/>
+                      </svg>
                     </div>
                     <span className="delivery-type-toggle__label">Delivery</span>
                   </button>
                   <button className="delivery-type-toggle__option delivery-type-toggle__option--selected">
                     <div className="delivery-type-toggle__icon-wrap">
-                      <img src={imgStoreIcon} alt="" width="22" height="20" />
+                      <svg width="22" height="20" viewBox="0 0 22 20" fill="none" aria-hidden="true">
+                        <path d="M1 8h20v10a1 1 0 01-1 1H2a1 1 0 01-1-1V8z" stroke="currentColor" strokeWidth="1.5"/>
+                        <path d="M1 8h20M3 8V5l2-4h12l2 4v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <rect x="8" y="12" width="6" height="7" rx="0.5" stroke="currentColor" strokeWidth="1.5"/>
+                      </svg>
                     </div>
                     <span className="delivery-type-toggle__label">Pick up in store</span>
                   </button>
