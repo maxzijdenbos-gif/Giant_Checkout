@@ -22,6 +22,7 @@ body {
   display: flex;
   flex-direction: column;
   background: var(--tone);
+  overflow-x: clip;
 }
 
 /* Global icon containers */

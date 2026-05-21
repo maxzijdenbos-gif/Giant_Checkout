@@ -330,7 +330,7 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
                 onClick={deliveryType === 'delivery' ? handleContinue : onContinueToPayment}
                 disabled={deliveryType === 'store' && !selectedLocation}
               >
-                {deliveryType === 'delivery' ? 'Continue' : 'Find store'}
+                {deliveryType === 'delivery' ? 'Select shipping option' : 'Find store'}
               </button>
             </section>
 
