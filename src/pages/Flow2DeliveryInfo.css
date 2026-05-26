@@ -1,3 +1,10 @@
+.store-fetch-error {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-s-action-s);
+  color: #c0392b;
+  margin: 0;
+}
+
 /* ── Checkout section (sub-group within a step) ─────── */
 .checkout-section {
   display: flex;

@@ -1,55 +1,155 @@
 import { useState, useRef, useEffect } from 'react'
+import * as GiantIcon from './GiantIcon'
 import './LocationSearchField.css'
 
 export interface LocationSuggestion {
   label: string
   sublabel: string
+  /** WGS-84 latitude from Nominatim — used downstream to find nearby dealers. */
+  lat?: number
+  /** WGS-84 longitude from Nominatim — used downstream to find nearby dealers. */
+  lon?: number
+}
+
+// Shape of a single result from the Nominatim API
+interface NominatimResult {
+  place_id: number
+  display_name: string
+  lat: string  // Nominatim returns coordinates as strings
+  lon: string
+  address: {
+    house_number?: string
+    road?: string
+    city?: string
+    town?: string
+    village?: string
+    municipality?: string
+    state?: string
+    postcode?: string
+    country?: string
+  }
+}
+
+// Turn a raw Nominatim result into the { label, sublabel } shape the dropdown uses
+function formatSuggestion(item: NominatimResult): LocationSuggestion {
+  const a = item.address
+
+  const parts: string[] = []
+
+  // Street: "350 5th Avenue"
+  const street = [a.house_number, a.road].filter(Boolean).join(' ')
+  if (street) parts.push(street)
+
+  // City / town / village fallback chain
+  const city = a.city ?? a.town ?? a.village ?? a.municipality
+  if (city) parts.push(city)
+
+  if (a.state) parts.push(a.state)
+  if (a.postcode) parts.push(a.postcode)
+
+  return {
+    label: parts.length > 0 ? parts.join(', ') : item.display_name,
+    sublabel: a.country ?? '',
+    lat: parseFloat(item.lat),
+    lon: parseFloat(item.lon),
+  }
 }
 
 interface Props {
   label: string
   placeholder?: string
-  suggestions: LocationSuggestion[]
   onSelect: (suggestion: LocationSuggestion | null) => void
   selectedValue?: string
 }
 
-export default function LocationSearchField({ label, placeholder, suggestions, onSelect, selectedValue }: Props) {
+type Status = 'idle' | 'loading' | 'done'
+
+export default function LocationSearchField({ label, placeholder, onSelect, selectedValue }: Props) {
   const [value, setValue] = useState(selectedValue ?? '')
-  const [showDropdown, setShowDropdown] = useState(false)
+  const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([])
+  const [status, setStatus] = useState<Status>('idle')
   const containerRef = useRef<HTMLDivElement>(null)
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const abortRef = useRef<AbortController | null>(null)
 
-  const filtered = value.trim()
-    ? suggestions.filter(s => s.label.toLowerCase().includes(value.toLowerCase()))
-    : []
-
+  // Close dropdown when clicking outside the component
   useEffect(() => {
     function onOutsideClick(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setShowDropdown(false)
+        setStatus('idle')
       }
     }
     document.addEventListener('mousedown', onOutsideClick)
     return () => document.removeEventListener('mousedown', onOutsideClick)
   }, [])
 
+  async function fetchSuggestions(query: string) {
+    // Cancel any in-flight request from the previous keystroke
+    if (abortRef.current) abortRef.current.abort()
+    abortRef.current = new AbortController()
+
+    try {
+      const params = new URLSearchParams({
+        q: query,
+        format: 'json',
+        limit: '5',
+        addressdetails: '1',
+      })
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?${params}`,
+        {
+          // Nominatim requires a meaningful Accept-Language so results come back in English
+          headers: { 'Accept-Language': 'en' },
+          signal: abortRef.current.signal,
+        }
+      )
+      const data: NominatimResult[] = await res.json()
+      setSuggestions(data.map(formatSuggestion))
+      setStatus('done')
+    } catch (err) {
+      // AbortError just means a newer request superseded this one — not a real error
+      if ((err as Error).name !== 'AbortError') {
+        setSuggestions([])
+        setStatus('done')
+      }
+    }
+  }
+
   function handleChange(v: string) {
     setValue(v)
-    setShowDropdown(v.length > 0)
     onSelect(null)
+
+    if (debounceRef.current) clearTimeout(debounceRef.current)
+
+    // Don't fetch until the user has typed at least 2 characters
+    if (v.trim().length < 2) {
+      setSuggestions([])
+      setStatus('idle')
+      return
+    }
+
+    // Show loading immediately so the UI feels responsive, then fetch after 350 ms.
+    // 350 ms keeps us comfortably within Nominatim's 1-request-per-second policy.
+    setStatus('loading')
+    debounceRef.current = setTimeout(() => fetchSuggestions(v.trim()), 350)
   }
 
   function handleClear() {
     setValue('')
-    setShowDropdown(false)
+    setSuggestions([])
+    setStatus('idle')
     onSelect(null)
   }
 
   function handlePick(s: LocationSuggestion) {
     setValue(s.label)
-    setShowDropdown(false)
+    setSuggestions([])
+    setStatus('idle')
     onSelect(s)
   }
+
+  // Show dropdown whenever we're loading or have a result set to display
+  const showDropdown = value.trim().length >= 2 && status !== 'idle'
 
   return (
     <div className="location-search" ref={containerRef}>
@@ -73,23 +173,25 @@ export default function LocationSearchField({ label, placeholder, suggestions, o
                 onClick={handleClear}
                 aria-label="Clear"
               >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
+                <GiantIcon.Close16 size={14} aria-hidden />
               </button>
               <div className="location-search__vdivider" />
               <span className="location-search__pin-icon">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6C3.5 9.5 8 14.5 8 14.5C8 14.5 12.5 9.5 12.5 6C12.5 3.515 10.485 1.5 8 1.5ZM8 7.5C7.172 7.5 6.5 6.828 6.5 6C6.5 5.172 7.172 4.5 8 4.5C8.828 4.5 9.5 5.172 9.5 6C9.5 6.828 8.828 7.5 8 7.5Z" fill="currentColor" />
-                </svg>
+                <GiantIcon.Location16 aria-hidden />
               </span>
             </div>
           )}
         </div>
 
-        {showDropdown && filtered.length > 0 && (
+        {showDropdown && (
           <div className="location-search__dropdown" role="listbox">
-            {filtered.map((s, i) => (
+            {status === 'loading' && (
+              <div className="location-search__status">Searching…</div>
+            )}
+            {status === 'done' && suggestions.length === 0 && (
+              <div className="location-search__status">No results found</div>
+            )}
+            {status === 'done' && suggestions.map((s, i) => (
               <button
                 key={i}
                 className="location-search__option"

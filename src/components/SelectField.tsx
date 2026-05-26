@@ -1,3 +1,4 @@
+import * as GiantIcon from './GiantIcon'
 import './InputField.css'
 import './SelectField.css'
 
@@ -41,13 +42,11 @@ export default function SelectField({ label, optional, value, onChange, error }:
               <option key={s} value={s}>{s}</option>
             ))}
           </select>
-          <svg className="input-field__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <GiantIcon.ChevronDown16 className="input-field__chevron" aria-hidden />
         </div>
         {error && (
           <div className="input-field__error">
-            <span className="input-field__error-text">This field is required</span>
+            <span className="input-field__error-text">{label} is mandatory, fill in this field to continue.</span>
           </div>
         )}
       </div>

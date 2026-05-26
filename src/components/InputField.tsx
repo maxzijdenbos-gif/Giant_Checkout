@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import * as GiantIcon from './GiantIcon'
 import './InputField.css'
 
 interface InputFieldProps {
@@ -51,16 +52,12 @@ export default function InputField({
             onBlur={() => setTouched(true)}
           />
           {locked && (
-            <svg className="input-field__lock" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              <rect x="4" y="11" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="1.5"/>
-              <circle cx="12" cy="17" r="1.5" fill="currentColor"/>
-            </svg>
+            <GiantIcon.Lock24 className="input-field__lock" aria-hidden />
           )}
         </div>
         {hasError && (
           <div className="input-field__error">
-            <span className="input-field__error-text">This field is required</span>
+            <span className="input-field__error-text">{label} is mandatory, fill in this field to continue.</span>
           </div>
         )}
       </div>

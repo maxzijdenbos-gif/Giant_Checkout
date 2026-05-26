@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { fetchDealersSortedByDistance, type GiantDealer } from '../giantDealers'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Divider from '../components/Divider'
@@ -6,20 +7,13 @@ import InputField from '../components/InputField'
 import SelectField from '../components/SelectField'
 import OrderSummary from '../components/OrderSummary'
 import LocationSearchField, { type LocationSuggestion } from '../components/LocationSearchField'
-import { imgDelivery32, imgStoreIcon } from '../assets'
+import * as GiantIcon from '../components/GiantIcon'
 import type { PrototypeFlow } from '../types'
 import './DeliveryInfo.css'
 import './DeliveryOptions.css'
 import './Flow2DeliveryInfo.css'
 
 type DeliveryType = 'delivery' | 'store'
-
-const NY_SUGGESTIONS: LocationSuggestion[] = [
-  { label: 'New York, NY', sublabel: 'United States' },
-  { label: 'New York', sublabel: 'United States' },
-  { label: 'New York Mills, MN', sublabel: 'United States' },
-  { label: 'New York, TX', sublabel: 'Netherlands' },
-]
 
 type AddressForm = {
   firstName: string; prefix: string; lastName: string
@@ -70,15 +64,16 @@ const MANDATORY_BILLING: (keyof BillingForm)[] = ['country', 'firstName', 'lastN
 interface Props {
   onBack: () => void
   onContinue: () => void
-  onContinueToPayment: () => void
+  onStoreFound: (dealers: GiantDealer[], closest: GiantDealer) => void
   prototypeFlow: PrototypeFlow
   onPrototypeFlowChange: (flow: PrototypeFlow) => void
   deliveryType: DeliveryType
   onDeliveryTypeChange: (type: DeliveryType) => void
 }
 
-export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPayment, prototypeFlow, onPrototypeFlowChange, deliveryType, onDeliveryTypeChange }: Props) {
+export default function Flow2DeliveryInfo({ onBack, onContinue, onStoreFound, prototypeFlow, onPrototypeFlowChange, deliveryType, onDeliveryTypeChange }: Props) {
   const [selectedLocation, setSelectedLocation] = useState<LocationSuggestion | null>(null)
+  const [findingStore, setFindingStore] = useState(false)
   const [billingAddressSame, setBillingAddressSame] = useState(true)
   const [newsletter, setNewsletter] = useState(false)
   const [validated, setValidated] = useState(false)
@@ -105,6 +100,24 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
     setDelivery(AUTOFILL_ADDRESS)
     setBilling(AUTOFILL_BILLING)
     setValidated(false)
+  }
+
+  async function handleFindStore() {
+    if (!selectedLocation?.lat || !selectedLocation?.lon) return
+    setFindingStore(true)
+    try {
+      const dealers = await fetchDealersSortedByDistance(selectedLocation.lat, selectedLocation.lon)
+      // Always navigate as long as at least one dealer was returned —
+      // the nearest one is pre-selected regardless of how far away it is.
+      if (dealers.length > 0) {
+        onStoreFound(dealers, dealers[0])
+        return
+      }
+    } catch {
+      // Swallow the error — button resets so the user can try again silently.
+      console.error('Failed to fetch Giant dealers')
+    }
+    setFindingStore(false)
   }
 
   function handleContinue() {
@@ -149,7 +162,7 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
                     onClick={() => onDeliveryTypeChange('delivery')}
                   >
                     <div className="delivery-type-toggle__icon-wrap">
-                      <img src={imgDelivery32} alt="" width="29" height="18" />
+                      <GiantIcon.Delivery32 aria-hidden />
                     </div>
                     <span className="delivery-type-toggle__label">Delivery</span>
                   </button>
@@ -158,7 +171,7 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
                     onClick={() => onDeliveryTypeChange('store')}
                   >
                     <div className="delivery-type-toggle__icon-wrap">
-                      <img src={imgStoreIcon} alt="" width="22" height="20" />
+                      <GiantIcon.Store32 aria-hidden />
                     </div>
                     <span className="delivery-type-toggle__label">Pick up in store</span>
                   </button>
@@ -171,7 +184,6 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
                     <LocationSearchField
                       label="Enter address or postal code"
                       placeholder="New York"
-                      suggestions={NY_SUGGESTIONS}
                       onSelect={s => setSelectedLocation(s)}
                       selectedValue={selectedLocation?.label}
                     />
@@ -246,9 +258,7 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
                     >
                       <div className={`form-checkbox__box${billingAddressSame ? ' form-checkbox__box--checked' : ''}`}>
                         {billingAddressSame && (
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                            <path d="M2 6L4.5 8.5L10 3.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                          <GiantIcon.Check16 size={10} style={{color: 'white'}} aria-hidden />
                         )}
                       </div>
                       <span className="form-checkbox__label">Billing and delivery address are the same</span>
@@ -262,9 +272,7 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
                     >
                       <div className={`form-checkbox__box${newsletter ? ' form-checkbox__box--checked' : ''}`}>
                         {newsletter && (
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                            <path d="M2 6L4.5 8.5L10 3.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                          <GiantIcon.Check16 size={10} style={{color: 'white'}} aria-hidden />
                         )}
                       </div>
                       <span className="form-checkbox__label">
@@ -327,10 +335,14 @@ export default function Flow2DeliveryInfo({ onBack, onContinue, onContinueToPaym
 
               <button
                 className="btn-save-continue"
-                onClick={deliveryType === 'delivery' ? handleContinue : onContinueToPayment}
-                disabled={deliveryType === 'store' && !selectedLocation}
+                onClick={deliveryType === 'delivery' ? handleContinue : handleFindStore}
+                disabled={(deliveryType === 'store' && !selectedLocation) || findingStore}
               >
-                {deliveryType === 'delivery' ? 'Select shipping option' : 'Find store'}
+                {deliveryType === 'delivery'
+                  ? 'Select shipping option'
+                  : findingStore
+                    ? 'Finding store…'
+                    : 'Find closest store near me'}
               </button>
             </section>
 

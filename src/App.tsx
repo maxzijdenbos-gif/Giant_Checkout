@@ -9,6 +9,7 @@ import Flow2ShippingOptions from './pages/Flow2ShippingOptions'
 import Flow2StoreConfirmation from './pages/Flow2StoreConfirmation'
 import type { DeliverySelection } from './types'
 import type { PrototypeFlow } from './types'
+import type { GiantDealer } from './giantDealers'
 
 type Page = 'checkout-start' | 'delivery' | 'delivery-options' | 'payment' | 'flow2-delivery' | 'flow2-shipping' | 'flow2-store-selection'
 
@@ -17,6 +18,8 @@ export default function App() {
   const [deliverySelection, setDeliverySelection] = useState<DeliverySelection>('store')
   const [prototypeFlow, setPrototypeFlow] = useState<PrototypeFlow>('new-checkout')
   const [flow2DeliveryType, setFlow2DeliveryType] = useState<'delivery' | 'store'>('delivery')
+  const [dealers, setDealers] = useState<GiantDealer[]>([])
+  const [selectedDealer, setSelectedDealer] = useState<GiantDealer | null>(null)
 
   function handlePrototypeFlowChange(flow: PrototypeFlow) {
     setPrototypeFlow(flow)
@@ -32,10 +35,13 @@ export default function App() {
 
   switch (page) {
     case 'flow2-store-selection':
+      if (!selectedDealer) return null
       return (
         <Flow2StoreConfirmation
           onBack={() => { setFlow2DeliveryType('store'); setPage('flow2-delivery') }}
           onContinue={() => setPage('payment')}
+          initialDealer={selectedDealer}
+          allDealers={dealers}
           {...prototypeSwitcherProps}
         />
       )
@@ -44,7 +50,11 @@ export default function App() {
         <Flow2DeliveryInfo
           onBack={() => setPage('checkout-start')}
           onContinue={() => setPage('flow2-shipping')}
-          onContinueToPayment={() => setPage('flow2-store-selection')}
+          onStoreFound={(foundDealers, closest) => {
+            setDealers(foundDealers)
+            setSelectedDealer(closest)
+            setPage('flow2-store-selection')
+          }}
           deliveryType={flow2DeliveryType}
           onDeliveryTypeChange={setFlow2DeliveryType}
           {...prototypeSwitcherProps}
@@ -66,6 +76,7 @@ export default function App() {
           <Flow2Payment
             onBack={() => setPage(flow2DeliveryType === 'store' ? 'flow2-store-selection' : 'flow2-shipping')}
             deliverySelection={deliverySelection}
+            selectedDealer={selectedDealer ?? undefined}
             {...prototypeSwitcherProps}
           />
         )

@@ -2,6 +2,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Divider from '../components/Divider'
 import OrderSummary from '../components/OrderSummary'
+import * as GiantIcon from '../components/GiantIcon'
 import { DELIVERY_OPTIONS } from '../types'
 import type { DeliverySelection } from '../types'
 import type { PrototypeFlow } from '../types'
@@ -26,31 +27,9 @@ const PAYMENT_OPTIONS = [
 
 type PaymentOptionId = typeof PAYMENT_OPTIONS[number]['id']
 
-function ChevronRight() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  )
-}
-
-function ArrowRightIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M3 8H13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-function EditIcon() {
-  return (
-    <svg className="collapsed-step__edit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M4 16.75V20H7.25L17.08 10.17L13.83 6.92L4 16.75Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M15.25 5.5L18.5 8.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  )
-}
+function ChevronRight() { return <GiantIcon.ChevronRight16 aria-hidden /> }
+function ArrowRightIcon() { return <GiantIcon.ArrowRight16 aria-hidden /> }
+function EditIcon() { return <GiantIcon.Edit24 className="collapsed-step__edit-icon" aria-hidden /> }
 
 function SelectedPaymentIcon() {
   return (

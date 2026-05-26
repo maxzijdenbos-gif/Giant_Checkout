@@ -136,6 +136,13 @@
   white-space: nowrap;
 }
 
+.location-search__status {
+  padding: var(--spacing\/sm);
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-s-action-s);
+  color: var(--contrast-variant);
+}
+
 .location-search__option-sublabel {
   font-family: var(--font\/family\/body);
   font-weight: 400;

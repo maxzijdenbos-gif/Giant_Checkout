@@ -3,8 +3,9 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Divider from '../components/Divider'
 import OrderSummary from '../components/OrderSummary'
-import StorePickerModal, { STORES } from '../components/StorePickerModal'
-import { imgDelivery32, imgStoreIcon } from '../assets'
+import StorePickerModal from '../components/StorePickerModal'
+import * as GiantIcon from '../components/GiantIcon'
+import type { GiantDealer } from '../giantDealers'
 import type { PrototypeFlow } from '../types'
 import './DeliveryInfo.css'
 import './DeliveryOptions.css'
@@ -16,14 +17,17 @@ interface Props {
   onContinue: () => void
   prototypeFlow: PrototypeFlow
   onPrototypeFlowChange: (flow: PrototypeFlow) => void
+  initialDealer: GiantDealer
+  allDealers: GiantDealer[]
 }
 
-export default function Flow2StoreConfirmation({ onBack, onContinue, prototypeFlow, onPrototypeFlowChange }: Props) {
-  const [selectedStoreId, setSelectedStoreId] = useState(STORES[0].id)
+export default function Flow2StoreConfirmation({
+  onBack, onContinue, prototypeFlow, onPrototypeFlowChange,
+  initialDealer, allDealers,
+}: Props) {
+  const [selectedDealer, setSelectedDealer] = useState<GiantDealer>(initialDealer)
   const [showModal, setShowModal] = useState(false)
   const [newsletter, setNewsletter] = useState(false)
-
-  const store = STORES.find(s => s.id === selectedStoreId) ?? STORES[0]
 
   return (
     <div className="page">
@@ -43,13 +47,13 @@ export default function Flow2StoreConfirmation({ onBack, onContinue, prototypeFl
                 <div className="delivery-type-toggle">
                   <button className="delivery-type-toggle__option" onClick={onBack}>
                     <div className="delivery-type-toggle__icon-wrap">
-                      <img src={imgDelivery32} alt="" width="29" height="18" />
+                      <GiantIcon.Delivery32 aria-hidden />
                     </div>
                     <span className="delivery-type-toggle__label">Delivery</span>
                   </button>
                   <button className="delivery-type-toggle__option delivery-type-toggle__option--selected">
                     <div className="delivery-type-toggle__icon-wrap">
-                      <img src={imgStoreIcon} alt="" width="22" height="20" />
+                      <GiantIcon.Store32 aria-hidden />
                     </div>
                     <span className="delivery-type-toggle__label">Pick up in store</span>
                   </button>
@@ -60,15 +64,19 @@ export default function Flow2StoreConfirmation({ onBack, onContinue, prototypeFl
               <div className="checkout-section">
                 <h3 className="delivery-section-title">Select a store location</h3>
                 <div className="store-confirmation-card">
-                  <p className="store-confirmation-card__name">{store.name}</p>
-                  <div className="store-confirmation-card__availability">
-                    <span className="store-confirmation-card__avail-primary">{store.availability}</span>
-                    <span className="store-confirmation-card__avail-detail">{store.availabilityDetail}</span>
-                  </div>
+                  <p className="store-confirmation-card__name">
+                    {selectedDealer.name}
+                    {selectedDealer.isGiantStore && (
+                      <span className="store-confirmation-card__badge">Giant Store</span>
+                    )}
+                  </p>
                   <div className="store-confirmation-card__address">
-                    <p>{store.address}</p>
-                    <p>({store.distance})</p>
+                    <p>{selectedDealer.address}</p>
+                    <p>({selectedDealer.distanceKm.toFixed(1)} km away)</p>
                   </div>
+                  {selectedDealer.phone && (
+                    <p className="store-confirmation-card__phone">{selectedDealer.phone}</p>
+                  )}
                   <div className="store-confirmation-card__actions">
                     <button className="store-confirmation-card__action-link">Show opening hours</button>
                     <span className="store-confirmation-card__action-divider" aria-hidden="true" />
@@ -90,9 +98,7 @@ export default function Flow2StoreConfirmation({ onBack, onContinue, prototypeFl
                 >
                   <div className={`form-checkbox__box${newsletter ? ' form-checkbox__box--checked' : ''}`}>
                     {newsletter && (
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                        <path d="M2 6L4.5 8.5L10 3.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                      <GiantIcon.Check16 size={10} style={{color: 'white'}} aria-hidden />
                     )}
                   </div>
                   <span className="form-checkbox__label">
@@ -124,9 +130,11 @@ export default function Flow2StoreConfirmation({ onBack, onContinue, prototypeFl
 
       {showModal && (
         <StorePickerModal
+          dealers={allDealers}
+          selectedId={selectedDealer.id}
           onClose={() => setShowModal(false)}
-          onSelect={(id) => {
-            setSelectedStoreId(id)
+          onSelect={(dealer) => {
+            setSelectedDealer(dealer)
             setShowModal(false)
           }}
         />

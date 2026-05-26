@@ -1,4 +1,5 @@
-import { imgLogo, imgComment } from '../assets'
+import { imgLogo } from '../assets'
+import * as GiantIcon from './GiantIcon'
 import { PROTOTYPE_FLOWS } from '../types'
 import type { PrototypeFlow } from '../types'
 import './Header.css'
@@ -28,9 +29,7 @@ export default function Header({ onBack, prototypeFlow, onPrototypeFlowChange }:
       <header className="header">
         <a href="#" className="header-nav" onClick={e => { e.preventDefault(); onBack?.() }}>
           <span className="icon icon--sm">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <GiantIcon.ArrowLeft16 aria-hidden />
           </span>
           <span className="action-m">Continue shopping</span>
         </a>
@@ -40,7 +39,7 @@ export default function Header({ onBack, prototypeFlow, onPrototypeFlowChange }:
         </div>
 
         <a href="#" className="header-nav">
-          <span className="icon icon--md"><img src={imgComment} alt="" /></span>
+          <span className="icon icon--md"><GiantIcon.Comment24 aria-hidden /></span>
           <span className="action-m">Customer Support</span>
         </a>
       </header>

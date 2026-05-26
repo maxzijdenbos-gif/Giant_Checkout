@@ -1,5 +1,5 @@
-import { imgTagIcon, imgTagHole, imgInfoDot, imgInfoLine, imgInfoCircle } from '../assets'
 import { imgProductPropel, imgProductAnthem, imgProductAurea, imgProductRevolt } from '../assets'
+import * as GiantIcon from './GiantIcon'
 import Divider from './Divider'
 import { DELIVERY_OPTIONS } from '../types'
 import type { DeliverySelection } from '../types'
@@ -27,20 +27,15 @@ function formatEuro(amount: number): string {
 function InfoIcon() {
   return (
     <span className="info-icon">
-      <span className="icon icon--sm" style={{ position: 'relative' }}>
-        <img src={imgInfoCircle} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-        <img src={imgInfoDot}    alt="" style={{ position: 'absolute', width: 2, height: 2, top: 4, left: 7 }} />
-        <img src={imgInfoLine}   alt="" style={{ position: 'absolute', width: 2, height: 5, top: 7, left: 7 }} />
-      </span>
+      <GiantIcon.Info16 aria-hidden style={{ display: 'block' }} />
     </span>
   )
 }
 
 function TagIcon() {
   return (
-    <span className="icon icon--md" style={{ position: 'relative' }}>
-      <img src={imgTagIcon} alt="" style={{ position: 'absolute', width: 20, height: 14, top: 5, left: 2, transform: 'rotate(45deg)' }} />
-      <img src={imgTagHole} alt="" style={{ position: 'absolute', width: 4, height: 4, top: 7, left: 7 }} />
+    <span className="icon icon--md" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <GiantIcon.Tag24 aria-hidden />
     </span>
   )
 }
@@ -97,10 +92,8 @@ export default function OrderSummary({ deliverySelection = 'store' }: Props) {
           <TagIcon />
           <span className="order-summary__coupon-label">Add coupon</span>
         </span>
-        <span className="icon icon--md">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 9.5L12 15.5L18 9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+        <span className="icon icon--md" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <GiantIcon.ChevronDown24 aria-hidden />
         </span>
       </button>
 

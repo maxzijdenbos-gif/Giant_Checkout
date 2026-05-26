@@ -2,9 +2,10 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Divider from '../components/Divider'
 import OrderSummary from '../components/OrderSummary'
-import { STORES } from '../components/StorePickerModal'
+import * as GiantIcon from '../components/GiantIcon'
 import { DELIVERY_OPTIONS } from '../types'
 import type { DeliverySelection, PrototypeFlow } from '../types'
+import type { GiantDealer } from '../giantDealers'
 import './DeliveryOptions.css'
 import './Payment.css'
 
@@ -13,6 +14,7 @@ interface Props {
   deliverySelection: DeliverySelection
   prototypeFlow: PrototypeFlow
   onPrototypeFlowChange: (flow: PrototypeFlow) => void
+  selectedDealer?: GiantDealer
 }
 
 const PAYMENT_OPTIONS = [
@@ -25,23 +27,8 @@ const PAYMENT_OPTIONS = [
 
 type PaymentOptionId = typeof PAYMENT_OPTIONS[number]['id']
 
-function ArrowRightIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M3 8H13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-function EditIcon() {
-  return (
-    <svg className="collapsed-step__edit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M4 16.75V20H7.25L17.08 10.17L13.83 6.92L4 16.75Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M15.25 5.5L18.5 8.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  )
-}
+function ArrowRightIcon() { return <GiantIcon.ArrowRight16 aria-hidden /> }
+function EditIcon() { return <GiantIcon.Edit24 className="collapsed-step__edit-icon" aria-hidden /> }
 
 function CreditCardIcon() {
   return (
@@ -53,22 +40,8 @@ function CreditCardIcon() {
   )
 }
 
-function LockIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <rect x="3" y="9" width="14" height="9" rx="2" stroke="#697386" strokeWidth="1.2" />
-      <path d="M6 9V6a4 4 0 1 1 8 0v3" stroke="#697386" strokeWidth="1.2" />
-    </svg>
-  )
-}
-
-function ChevronDown() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M4 6L8 10L12 6" stroke="#697386" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
+function LockIcon() { return <GiantIcon.Lock24 size={20} style={{color: '#697386'}} aria-hidden /> }
+function ChevronDown() { return <GiantIcon.ChevronDown16 style={{color: '#697386'}} aria-hidden /> }
 
 function CvcIcon() {
   return (
@@ -117,10 +90,8 @@ function PaymentOptionIcon({ id }: { id: PaymentOptionId }) {
   )
 }
 
-export default function Flow2Payment({ onBack, deliverySelection, prototypeFlow, onPrototypeFlowChange }: Props) {
+export default function Flow2Payment({ onBack, deliverySelection, prototypeFlow, onPrototypeFlowChange, selectedDealer }: Props) {
   const delivery = DELIVERY_OPTIONS[deliverySelection]
-  const store = STORES[0]
-  const [street, city] = store.address.split(',').map(s => s.trim())
 
   return (
     <div className="page">
@@ -141,15 +112,14 @@ export default function Flow2Payment({ onBack, deliverySelection, prototypeFlow,
               <div className="address-summary">
                 <div className="address-summary__lines">
                   <div className="delivery-summary__name-price">
-                    <span>{deliverySelection === 'store' ? store.name : delivery.name}</span>
+                    <span>{deliverySelection === 'store' && selectedDealer ? selectedDealer.name : delivery.name}</span>
                     <span>{delivery.priceLabel}</span>
                   </div>
                   <p>{delivery.date}</p>
-                  {deliverySelection === 'store' && (
+                  {deliverySelection === 'store' && selectedDealer && (
                     <>
-                      <p>{DELIVERY_OPTIONS.store.name}, {city} City</p>
-                      <p>{street}</p>
-                      <p>({store.distance})</p>
+                      <p>{selectedDealer.address}</p>
+                      <p>({selectedDealer.distanceKm.toFixed(1)} km away)</p>
                     </>
                   )}
                 </div>

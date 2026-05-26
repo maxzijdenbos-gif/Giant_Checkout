@@ -1,6 +1,6 @@
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { imgCheck } from '../assets'
+import * as GiantIcon from '../components/GiantIcon'
 import type { PrototypeFlow } from '../types'
 import './CheckoutStart.css'
 
@@ -37,7 +37,7 @@ export default function CheckoutStart({ onGuestCheckout, prototypeFlow, onProtot
               <ul className="option-card__benefits-list">
                 {BENEFITS.map(b => (
                   <li key={b} className="option-card__benefit">
-                    <span className="icon icon--sm"><img src={imgCheck} alt="" /></span>
+                    <span className="icon icon--sm"><GiantIcon.Check16 aria-hidden /></span>
                     <span>{b}</span>
                   </li>
                 ))}

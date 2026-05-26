@@ -1,10 +1,8 @@
-import { useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Divider from '../components/Divider'
 import OrderSummary from '../components/OrderSummary'
-import StorePickerModal from '../components/StorePickerModal'
-import { imgDelivery32, imgPen } from '../assets'
+import * as GiantIcon from '../components/GiantIcon'
 import type { DeliverySelection } from '../types'
 import type { PrototypeFlow } from '../types'
 import './DeliveryOptions.css'
@@ -26,8 +24,6 @@ export default function DeliveryOptions({
   prototypeFlow,
   onPrototypeFlowChange,
 }: Props) {
-  const [showStorePicker, setShowStorePicker] = useState(false)
-
   return (
     <div className="page">
       <Header onBack={onBack} prototypeFlow={prototypeFlow} onPrototypeFlowChange={onPrototypeFlowChange} />
@@ -46,7 +42,7 @@ export default function DeliveryOptions({
             >
               <div className="collapsed-step__header">
                 <h2 className="checkout-step__heading">Address</h2>
-                <img src={imgPen} alt="" width="24" height="24" className="collapsed-step__edit-icon" />
+                <GiantIcon.Edit24 className="collapsed-step__edit-icon" aria-hidden />
               </div>
               <div className="address-summary">
                 <p className="address-summary__section-title">Delivery address</p>
@@ -71,7 +67,7 @@ export default function DeliveryOptions({
                   onClick={() => onDeliveryChange('standard')}
                 >
                   <div className="selectable-card__icon">
-                    <img src={imgDelivery32} alt="" width="32" height="32" />
+                    <GiantIcon.Delivery32 aria-hidden />
                   </div>
                   <div className="selectable-card__body">
                     <div className="selectable-card__title">Standard Delivery</div>
@@ -86,7 +82,7 @@ export default function DeliveryOptions({
                   onClick={() => onDeliveryChange('express')}
                 >
                   <div className="selectable-card__icon">
-                    <img src={imgDelivery32} alt="" width="32" height="32" />
+                    <GiantIcon.Delivery32 aria-hidden />
                   </div>
                   <div className="selectable-card__body">
                     <div className="selectable-card__title">Express Delivery</div>
@@ -122,10 +118,7 @@ export default function DeliveryOptions({
                         </button>
                         <button
                           className="selectable-card__action-btn"
-                          onClick={e => {
-                            e.stopPropagation()
-                            setShowStorePicker(true)
-                          }}
+                          onClick={e => e.stopPropagation()}
                         >
                           Change
                         </button>
@@ -158,16 +151,6 @@ export default function DeliveryOptions({
       </div>
 
       <Footer variant="dark" />
-
-      {showStorePicker && (
-        <StorePickerModal
-          onClose={() => setShowStorePicker(false)}
-          onSelect={() => {
-            onDeliveryChange('store')
-            setShowStorePicker(false)
-          }}
-        />
-      )}
     </div>
   )
 }

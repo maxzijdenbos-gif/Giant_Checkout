@@ -2,7 +2,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Divider from '../components/Divider'
 import OrderSummary from '../components/OrderSummary'
-import { imgDelivery32, imgStoreIcon } from '../assets'
+import * as GiantIcon from '../components/GiantIcon'
 import type { DeliverySelection, PrototypeFlow } from '../types'
 import { DELIVERY_OPTIONS } from '../types'
 import './DeliveryOptions.css'
@@ -47,13 +47,13 @@ export default function Flow2ShippingOptions({
                 <div className="delivery-type-toggle">
                   <div className="delivery-type-toggle__option delivery-type-toggle__option--selected">
                     <div className="delivery-type-toggle__icon-wrap">
-                      <img src={imgDelivery32} alt="" width="32" height="32" />
+                      <GiantIcon.Delivery32 aria-hidden />
                     </div>
                     <span className="delivery-type-toggle__label">Delivery</span>
                   </div>
                   <div className="delivery-type-toggle__option">
                     <div className="delivery-type-toggle__icon-wrap">
-                      <img src={imgStoreIcon} alt="" width="32" height="32" />
+                      <GiantIcon.Store32 aria-hidden />
                     </div>
                     <span className="delivery-type-toggle__label">Pick up in store</span>
                   </div>
@@ -96,7 +96,7 @@ export default function Flow2ShippingOptions({
                   >
                     <div className="selectable-card__icon">
                       <div className="selectable-card__icon-wrap">
-                        <img src={imgDelivery32} alt="" width="32" height="32" />
+                        <GiantIcon.Delivery32 aria-hidden />
                       </div>
                     </div>
                     <div className="selectable-card__body">
@@ -112,7 +112,7 @@ export default function Flow2ShippingOptions({
                   >
                     <div className="selectable-card__icon">
                       <div className="selectable-card__icon-wrap">
-                        <img src={imgDelivery32} alt="" width="32" height="32" />
+                        <GiantIcon.Delivery32 aria-hidden />
                       </div>
                     </div>
                     <div className="selectable-card__body">
