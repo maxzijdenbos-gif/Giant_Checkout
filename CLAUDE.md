@@ -27,18 +27,21 @@ The source SVGs live in `Giant_Icons/Icons/<Name>/<size>.svg` (at the project ro
 
 | Export | Size | Usage |
 |--------|------|-------|
-| `ArrowLeft16` | 16 | Back navigation (Header) |
+| `ArrowLeft16` | 16 | (unused — replaced by ChevronLeft16) |
 | `ArrowRight16` | 16 | Continue / place order buttons |
 | `ArrowRight24` | 24 | Large continue buttons |
 | `Check16` | 16 | Checkboxes, benefits list |
 | `Check24` | 24 | Large checkmarks |
 | `ChevronDown16` | 16 | Select dropdowns |
 | `ChevronDown24` | 24 | Coupon expand in OrderSummary |
+| `ChevronLeft16` | 16 | Back navigation (Header) |
 | `ChevronRight16` | 16 | Payment option rows |
+| `ChevronRight24` | 24 | Coupon submit button |
 | `Close16` | 16 | Modal close, clear input |
 | `Close24` | 24 | Larger close buttons |
 | `Comment24` | 24 | Customer support link in Header |
 | `Delivery32` | 32 | Delivery method toggle + cards |
+| `ReturnProduct32` | 32 | Return policy USP in OrderSummary |
 | `Edit16` | 16 | Small edit buttons |
 | `Edit24` | 24 | Collapsed-step edit button |
 | `Info16` | 16 | Tooltip / info indicator |

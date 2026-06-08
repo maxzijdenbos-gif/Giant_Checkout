@@ -6,6 +6,7 @@ import './CheckoutStart.css'
 
 interface Props {
   onGuestCheckout: () => void
+  onLoggedInCheckout: () => void
   prototypeFlow: PrototypeFlow
   onPrototypeFlowChange: (flow: PrototypeFlow) => void
 }
@@ -16,7 +17,7 @@ const BENEFITS = [
   'Register your bikes',
 ]
 
-export default function CheckoutStart({ onGuestCheckout, prototypeFlow, onPrototypeFlowChange }: Props) {
+export default function CheckoutStart({ onGuestCheckout, onLoggedInCheckout, prototypeFlow, onPrototypeFlowChange }: Props) {
   return (
     <div className="page">
       <Header prototypeFlow={prototypeFlow} onPrototypeFlowChange={onPrototypeFlowChange} />
@@ -26,11 +27,11 @@ export default function CheckoutStart({ onGuestCheckout, prototypeFlow, onProtot
 
         <div className="checkout-start__options">
 
-          <div className="option-card option-card--shaded">
+          <div className="option-card">
             <h2 className="option-card__title">Giant ID</h2>
             <div className="option-card__buttons">
-              <button className="btn btn--primary">Log in</button>
-              <button className="btn btn--outline">Create account</button>
+              <button className="btn btn--primary" onClick={onLoggedInCheckout}>Log in</button>
+              <button className="btn btn--outline" onClick={onLoggedInCheckout}>Create account</button>
             </div>
             <div className="option-card__benefits">
               <h3 className="option-card__benefits-title">Sign in for faster checkout</h3>
@@ -45,6 +46,8 @@ export default function CheckoutStart({ onGuestCheckout, prototypeFlow, onProtot
             </div>
           </div>
 
+          <div className="checkout-start__divider" aria-hidden="true" />
+
           <div className="option-card">
             <h2 className="option-card__title">Guest Checkout</h2>
             <div className="option-card__buttons">
@@ -57,7 +60,7 @@ export default function CheckoutStart({ onGuestCheckout, prototypeFlow, onProtot
         </div>
       </main>
 
-      <Footer variant="light" />
+      <Footer variant="dark" />
     </div>
   )
 }

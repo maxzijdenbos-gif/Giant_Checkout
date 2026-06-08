@@ -1,0 +1,117 @@
+/* ── Closed state ───────────────────────────────────────────────────────── */
+
+.coupon-section__closed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 56px;
+  /* py-16px — vertical padding only, no horizontal padding */
+  padding: var(--spacing\/sm) 0;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  border-radius: var(--spacing\/xs);
+  cursor: pointer;
+  color: var(--contrast);
+}
+
+/* ── Open state ─────────────────────────────────────────────────────────── */
+
+.coupon-section__open {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/sm);     /* 16px between header row and input */
+  padding-top: var(--spacing\/sm); /* 16px — top padding only */
+  width: 100%;
+}
+
+.coupon-section__open-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--contrast);
+}
+
+/* ── Shared: label group ────────────────────────────────────────────────── */
+
+.coupon-section__label-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing\/xs); /* 8px */
+}
+
+.coupon-section__label {
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+/* Chevron rotated to point up when open */
+.coupon-section__chevron--up {
+  transform: rotate(180deg);
+}
+
+/* ── Input row (open state) ──────────────────────────────────────────────── */
+
+.coupon-section__input-row {
+  display: flex;
+  gap: var(--spacing\/xxs); /* 4px */
+  align-items: center;
+  width: 100%;
+}
+
+.coupon-section__field {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: var(--spacing\/sm); /* 16px */
+  border-radius: var(--spacing\/xs); /* 8px */
+  border: 1px solid var(--colors\/grey-10);
+  background: var(--colors\/white);
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.coupon-section__field::placeholder {
+  color: var(--contrast-variant);
+}
+
+.coupon-section__field--active {
+  border: 2px solid var(--colors\/primary);
+}
+
+.coupon-section__apply {
+  flex-shrink: 0;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: var(--general\/ml); /* 32px */
+  background: var(--colors\/primary);
+  color: white;
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-s-action-s);
+  line-height: var(--font\/font\/line-height\/xsmall);
+  text-transform: uppercase;
+  border: 0.4px solid transparent;
+  cursor: pointer;
+}
+
+.coupon-section__apply:disabled {
+  background: var(--tint-variant, #f2f2f5);
+  border: 0.4px solid var(--tint, #dedee0);
+  color: var(--contrast-variant, #58626e);
+  cursor: default;
+}

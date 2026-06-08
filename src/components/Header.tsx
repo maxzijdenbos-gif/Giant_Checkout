@@ -27,9 +27,9 @@ export default function Header({ onBack, prototypeFlow, onPrototypeFlowChange }:
       </div>
 
       <header className="header">
-        <a href="#" className="header-nav" onClick={e => { e.preventDefault(); onBack?.() }}>
+        <a href="#" className="header-nav header-nav--back" onClick={e => { e.preventDefault(); onBack?.() }}>
           <span className="icon icon--sm">
-            <GiantIcon.ArrowLeft16 aria-hidden />
+            <GiantIcon.ChevronLeft16 aria-hidden />
           </span>
           <span className="action-m">Continue shopping</span>
         </a>
@@ -40,7 +40,7 @@ export default function Header({ onBack, prototypeFlow, onPrototypeFlowChange }:
 
         <a href="#" className="header-nav">
           <span className="icon icon--md"><GiantIcon.Comment24 aria-hidden /></span>
-          <span className="action-m">Customer Support</span>
+          <span className="action-m">Support</span>
         </a>
       </header>
     </>

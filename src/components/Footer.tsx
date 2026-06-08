@@ -10,7 +10,13 @@ export default function Footer({ variant = 'light' }: FooterProps) {
     <footer className={`footer footer--${variant}`}>
       <div className="footer-inner">
         <div className="footer-text">
-          <p>Need some help? Please reach out to us directly through our contact form or live chat.</p>
+          <p className="footer-text__help">Need some help? Please reach out to us directly through our contact form or live chat.</p>
+          {variant === 'dark' && (
+            <div className="footer-usp">
+              <strong className="footer-usp__title">Right to Return</strong>
+              <span className="footer-usp__subtitle">You have 14-days to change your mind</span>
+            </div>
+          )}
           <p>Privacy | Terms and conditions</p>
           <p>Copyright © 2026 | Giant Bicycles United States</p>
         </div>

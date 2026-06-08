@@ -1,10 +1,11 @@
+import { useState, useEffect, useRef } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Divider from '../components/Divider'
 import OrderSummary from '../components/OrderSummary'
+import SelectableCard from '../components/SelectableCard'
 import * as GiantIcon from '../components/GiantIcon'
-import type { DeliverySelection } from '../types'
-import type { PrototypeFlow } from '../types'
+import type { DeliverySelection, PrototypeFlow, AddressData } from '../types'
 import './DeliveryOptions.css'
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
   onContinue: () => void
   deliverySelection: DeliverySelection
   onDeliveryChange: (s: DeliverySelection) => void
+  addressData: AddressData | null
   prototypeFlow: PrototypeFlow
   onPrototypeFlowChange: (flow: PrototypeFlow) => void
 }
@@ -21,9 +23,67 @@ export default function DeliveryOptions({
   onContinue,
   deliverySelection,
   onDeliveryChange,
+  addressData,
   prototypeFlow,
   onPrototypeFlowChange,
 }: Props) {
+  const fullName = addressData
+    ? [addressData.firstName, addressData.prefix, addressData.lastName].filter(Boolean).join(' ')
+    : ''
+  const addressLine1 = addressData
+    ? [addressData.address, addressData.apt].filter(Boolean).join(', ')
+    : ''
+  const addressLine2 = addressData
+    ? [addressData.city, addressData.state, addressData.zip].filter(Boolean).join(', ')
+    : ''
+
+  const loadedCards = useRef<Set<DeliverySelection>>(new Set())
+  const [subcardLoading, setSubcardLoading] = useState(false)
+
+  useEffect(() => {
+    if (deliverySelection === 'home-setup' || deliverySelection === 'store') {
+      if (loadedCards.current.has(deliverySelection)) {
+        setSubcardLoading(false)
+        return
+      }
+      setSubcardLoading(true)
+      const t = setTimeout(() => {
+        loadedCards.current.add(deliverySelection)
+        setSubcardLoading(false)
+      }, 2000)
+      return () => clearTimeout(t)
+    } else {
+      setSubcardLoading(false)
+    }
+  }, [deliverySelection])
+
+  const storeSubcard = (
+    subcardLoading
+      ? <div className="subcard-skeleton" />
+      : (
+        <div className="store-subcard">
+          <div className="store-subcard__header">
+            <p className="store-subcard__name">Giant Store New York</p>
+            <p className="store-subcard__description">Is the closest store with your items available</p>
+          </div>
+          <p className="store-subcard__date">Pick up from Thursday, May 7</p>
+          <div className="store-subcard__address">
+            <p>Giant Store New York, New York City</p>
+            <p>317 Grand St</p>
+            <p>(98.7 mi.)</p>
+          </div>
+          <div className="store-subcard__actions">
+            <button className="store-subcard__btn" onClick={e => e.stopPropagation()}>
+              Show opening hours
+            </button>
+            <button className="store-subcard__btn" onClick={e => e.stopPropagation()}>
+              Change store
+            </button>
+          </div>
+        </div>
+      )
+  )
+
   return (
     <div className="page">
       <Header onBack={onBack} prototypeFlow={prototypeFlow} onPrototypeFlowChange={onPrototypeFlowChange} />
@@ -34,7 +94,7 @@ export default function DeliveryOptions({
         <div className="delivery-left">
           <div className="delivery-left__inner">
 
-            {/* Address step — collapsed / complete — click to go back */}
+            {/* Address step — collapsed / complete */}
             <button
               className="collapsed-step"
               onClick={onBack}
@@ -47,10 +107,10 @@ export default function DeliveryOptions({
               <div className="address-summary">
                 <p className="address-summary__section-title">Delivery address</p>
                 <div className="address-summary__lines">
-                  <p>Max Zijdenbos</p>
-                  <p>1 New England River Rd</p>
-                  <p>Washington, West Virginia, 26181-9479, US</p>
-                  <p>(123) 456-7890</p>
+                  {fullName && <p>{fullName}</p>}
+                  {addressLine1 && <p>{addressLine1}</p>}
+                  {addressLine2 && <p>{addressLine2}</p>}
+                  {addressData?.phone && <p>{addressData.phone}</p>}
                 </div>
               </div>
               <Divider thick />
@@ -61,72 +121,47 @@ export default function DeliveryOptions({
               <h2 className="checkout-step__heading">Delivery options</h2>
 
               <div className="delivery-cards">
-                {/* Standard Delivery */}
-                <button
-                  className={`selectable-card${deliverySelection === 'standard' ? ' selectable-card--selected' : ''}`}
+                <p className="delivery-cards__label">Choose a delivery option</p>
+
+                <SelectableCard
+                  icon={<GiantIcon.Delivery32 aria-hidden />}
+                  title="Standard delivery"
+                  date="Friday, May 8"
+                  price="$4.99"
+                  selected={deliverySelection === 'standard'}
                   onClick={() => onDeliveryChange('standard')}
-                >
-                  <div className="selectable-card__icon">
-                    <GiantIcon.Delivery32 aria-hidden />
-                  </div>
-                  <div className="selectable-card__body">
-                    <div className="selectable-card__title">Standard Delivery</div>
-                    <div className="selectable-card__subtitle">Friday, May 8</div>
-                  </div>
-                  <div className="selectable-card__price">$4.99</div>
-                </button>
+                />
 
-                {/* Express Delivery */}
-                <button
-                  className={`selectable-card${deliverySelection === 'express' ? ' selectable-card--selected' : ''}`}
+                <SelectableCard
+                  icon={<GiantIcon.Delivery32 aria-hidden />}
+                  title="Express delivery"
+                  date="Friday, May 4"
+                  price="$12.99"
+                  selected={deliverySelection === 'express'}
                   onClick={() => onDeliveryChange('express')}
+                />
+
+                <SelectableCard
+                  icon={<GiantIcon.Home32 aria-hidden />}
+                  title="Home setup"
+                  subtitle="Home setup is available at select stores in your area"
+                  price="$19.99"
+                  selected={deliverySelection === 'home-setup'}
+                  onClick={() => onDeliveryChange('home-setup')}
                 >
-                  <div className="selectable-card__icon">
-                    <GiantIcon.Delivery32 aria-hidden />
-                  </div>
-                  <div className="selectable-card__body">
-                    <div className="selectable-card__title">Express Delivery</div>
-                    <div className="selectable-card__subtitle">Thursday, May 7</div>
-                  </div>
-                  <div className="selectable-card__price">$7.99</div>
-                </button>
-              </div>
+                  {storeSubcard}
+                </SelectableCard>
 
-              <h3 className="delivery-section-title">Pick up in store</h3>
-
-              <div className="delivery-cards">
-                {/* Giant Store New York */}
-                <button
-                  className={`selectable-card${deliverySelection === 'store' ? ' selectable-card--selected' : ''}`}
+                <SelectableCard
+                  icon={<GiantIcon.Store32 aria-hidden />}
+                  title="Pick up in store"
+                  subtitle="Pick up is available at select stores in your country"
+                  price="Free"
+                  selected={deliverySelection === 'store'}
                   onClick={() => onDeliveryChange('store')}
                 >
-                  <div className="selectable-card__body">
-                    <div className="selectable-card__title">Giant Store New York</div>
-                    <div className="selectable-card__subtitle">Pick up from Thursday, May 7</div>
-                    <div className="selectable-card__address">
-                      <p>Giant Store New York, New York City</p>
-                      <p>317 Grand St</p>
-                      <p>(98.7 mi.)</p>
-                    </div>
-                    {deliverySelection === 'store' && (
-                      <div className="selectable-card__actions">
-                        <button
-                          className="selectable-card__action-btn"
-                          onClick={e => e.stopPropagation()}
-                        >
-                          Show opening hours
-                        </button>
-                        <button
-                          className="selectable-card__action-btn"
-                          onClick={e => e.stopPropagation()}
-                        >
-                          Change
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                  <div className="selectable-card__price">Free</div>
-                </button>
+                  {storeSubcard}
+                </SelectableCard>
               </div>
 
               <button className="btn-save-continue" onClick={onContinue}>

@@ -7,6 +7,7 @@ interface InputFieldProps {
   optional?: boolean
   type?: string
   locked?: boolean
+  prefilled?: boolean
   placeholder?: string
   defaultValue?: string
   // Controlled mode — provide both to opt in
@@ -18,7 +19,7 @@ interface InputFieldProps {
 }
 
 export default function InputField({
-  label, optional, type = 'text', locked, placeholder, defaultValue,
+  label, optional, type = 'text', locked, prefilled, placeholder, defaultValue,
   value: controlledValue, onChange, error: externalError,
 }: InputFieldProps) {
   const isControlled = controlledValue !== undefined
@@ -26,16 +27,17 @@ export default function InputField({
   const [touched, setTouched] = useState(false)
 
   const value = isControlled ? controlledValue : internalValue
+  const isDisabled = locked || prefilled
 
   function handleChange(v: string) {
     if (isControlled) onChange?.(v)
     else setInternalValue(v)
   }
 
-  const hasError = externalError === true || (!optional && !locked && touched && value.trim() === '')
+  const hasError = externalError === true || (!optional && !isDisabled && touched && value.trim() === '')
 
   return (
-    <div className={`input-field${locked ? ' input-field--locked' : ''}${hasError ? ' input-field--error' : ''}`}>
+    <div className={`input-field${isDisabled ? ' input-field--locked' : ''}${hasError ? ' input-field--error' : ''}`}>
       <div className="input-field__label-row">
         <label className="input-field__label">{label}</label>
         {optional && <span className="input-field__optional">(Optional)</span>}
@@ -46,7 +48,7 @@ export default function InputField({
             className="input-field__input"
             type={type}
             value={value}
-            disabled={locked}
+            disabled={isDisabled}
             placeholder={placeholder}
             onChange={e => handleChange(e.target.value)}
             onBlur={() => setTouched(true)}

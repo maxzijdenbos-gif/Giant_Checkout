@@ -1,6 +1,13 @@
-import { imgProductPropel, imgProductAnthem, imgProductAurea, imgProductRevolt } from '../assets'
+import { useState } from 'react'
+import {
+  imgPurpleBikeBig, imgPurpleBikeSmall,
+  imgBlueBikeBig,   imgBlueBikeSmall,
+  imgGlassesBig,    imgGlassesSmall,
+  imgWhiteBikeBig,  imgWhiteBikeSmall,
+} from '../assets'
 import * as GiantIcon from './GiantIcon'
 import Divider from './Divider'
+import CouponSection from './CouponSection'
 import { DELIVERY_OPTIONS } from '../types'
 import type { DeliverySelection } from '../types'
 import './OrderSummary.css'
@@ -10,10 +17,10 @@ interface Props {
 }
 
 const PRODUCTS = [
-  { img: imgProductPropel, name: 'Propel Advanced SL-FF Team', price: '$5,300.00', meta: 'Size L' },
-  { img: imgProductAnthem, name: 'Anthem Advanced SL Frameset', price: '$999',      meta: 'Electrical Storm | L' },
-  { img: imgProductAurea,  name: 'Aurea',                       price: '$200,00',   meta: 'Yellow / Silver Lens', salePrice: '$220,00' },
-  { img: imgProductRevolt, name: 'Revolt Advanced 0',           price: '$3,950.00', meta: 'Snow Drift | L' },
+  { imgBig: imgPurpleBikeBig, imgSmall: imgPurpleBikeSmall, name: 'Propel Advanced SL-FF Team', price: '$5,300.00', meta: 'Size L' },
+  { imgBig: imgBlueBikeBig,   imgSmall: imgBlueBikeSmall,   name: 'Anthem Advanced SL Frameset', price: '$999',      meta: 'Electrical Storm | L' },
+  { imgBig: imgGlassesBig,    imgSmall: imgGlassesSmall,    name: 'Aurea',                       price: '$200,00',   meta: 'Yellow / Silver Lens', salePrice: '$220,00' },
+  { imgBig: imgWhiteBikeBig,  imgSmall: imgWhiteBikeSmall,  name: 'Revolt Advanced 0',           price: '$3,950.00', meta: 'Snow Drift | L' },
 ]
 
 const BASE_TOTAL = 15655 // 14350 + 1100 + 225 - 20
@@ -32,26 +39,19 @@ function InfoIcon() {
   )
 }
 
-function TagIcon() {
-  return (
-    <span className="icon icon--md" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <GiantIcon.Tag24 aria-hidden />
-    </span>
-  )
-}
-
 export default function OrderSummary({ deliverySelection = 'store' }: Props) {
+  const [itemsExpanded, setItemsExpanded] = useState(false)
   const delivery = DELIVERY_OPTIONS[deliverySelection]
   const deliveryValueLabel = delivery.price === 0 ? 'Free' : formatEuro(delivery.price)
   const total = BASE_TOTAL + delivery.price
   const totalFormatted = formatEuro(total)
 
   const lineItems = [
-    { label: '4 items',         value: '$14.350,00', cls: '' },
-    { label: 'Sales tax',       value: '$1,100',     cls: '' },
-    { label: 'Destination fee', value: '$225,00',    cls: '', tooltip: true },
-    { label: 'Delivery',        value: deliveryValueLabel, cls: '' },
-    { label: 'Total savings',   value: '- $20,00',   cls: 'order-summary__line-value--savings', savings: true },
+    { label: '4 items',              value: '$14.350,00', cls: '' },
+    { label: 'Sales tax',            value: '$1,100',     cls: '' },
+    { label: 'Destination fee',      value: '$225,00',    cls: '', tooltip: true },
+    { label: 'Delivery estimation',  value: deliveryValueLabel, cls: '' },
+    { label: 'Total savings',        value: '- $20,00',   cls: 'order-summary__line-value--savings', savings: true },
   ]
 
   return (
@@ -59,7 +59,7 @@ export default function OrderSummary({ deliverySelection = 'store' }: Props) {
 
       {/* Header */}
       <div className="order-summary__header">
-        <h2 className="order-summary__title">Your order</h2>
+        <h2 className="order-summary__title">Order summary</h2>
         <button className="order-summary__edit">Edit</button>
       </div>
 
@@ -87,37 +87,62 @@ export default function OrderSummary({ deliverySelection = 'store' }: Props) {
       </div>
 
       {/* Coupon */}
-      <button className="order-summary__coupon">
-        <span className="order-summary__coupon-left">
-          <TagIcon />
-          <span className="order-summary__coupon-label">Add coupon</span>
-        </span>
-        <span className="icon icon--md" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <GiantIcon.ChevronDown24 aria-hidden />
-        </span>
-      </button>
+      <CouponSection />
 
       <Divider />
 
-      {/* Product list */}
-      <div className="order-summary__products">
-        {PRODUCTS.map(p => (
-          <div key={p.name} className="product-tile">
-            <div className="product-tile__image">
-              <img src={p.img} alt={p.name} />
+      {/* Your items — collapsible on mobile, always open on desktop */}
+      <div className={`order-summary__items-section${itemsExpanded ? ' order-summary__items-section--open' : ''}`}>
+        <button
+          className="order-summary__items-toggle"
+          onClick={() => setItemsExpanded(e => !e)}
+          aria-expanded={itemsExpanded}
+        >
+          <span className="order-summary__items-heading">Your items</span>
+          <span className="order-summary__items-chevron" aria-hidden>
+            <GiantIcon.ChevronDown24 className={itemsExpanded ? 'order-summary__chevron--up' : undefined} aria-hidden />
+          </span>
+        </button>
+
+        <div className="order-summary__mini-thumbs">
+          {PRODUCTS.map(p => (
+            <div key={p.name} className="order-summary__mini-thumb">
+              <img src={p.imgSmall} alt={p.name} />
             </div>
-            <div className="product-tile__info">
-              <div className="product-tile__name">{p.name}</div>
-              <div className="product-tile__price">
-                {p.salePrice
-                  ? <><span className="product-tile__price--sale">{p.price}</span>{' '}<span className="product-tile__price--original">{p.salePrice}</span></>
-                  : p.price
-                }
+          ))}
+          <div className="order-summary__mini-fade" aria-hidden />
+        </div>
+
+        <div className="order-summary__products">
+          {PRODUCTS.map(p => (
+            <div key={p.name} className="product-tile">
+              <div className="product-tile__image">
+                <img src={p.imgBig} alt={p.name} />
               </div>
-              <div className="product-tile__meta">{p.meta}</div>
+              <div className="product-tile__info">
+                <div className="product-tile__name">{p.name}</div>
+                <div className="product-tile__price">
+                  {p.salePrice
+                    ? <><span className="product-tile__price--sale">{p.price}</span>{' '}<span className="product-tile__price--original">{p.salePrice}</span></>
+                    : p.price
+                  }
+                </div>
+                <div className="product-tile__meta">{p.meta}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </div>
+
+      <Divider />
+
+      {/* Return policy USP */}
+      <div className="order-summary__usp">
+        <GiantIcon.ReturnProduct32 aria-hidden />
+        <div className="order-summary__usp-content">
+          <p className="order-summary__usp-title">Right to return</p>
+          <p className="order-summary__usp-body">You have 14 days to change your mind</p>
+        </div>
       </div>
 
     </div>

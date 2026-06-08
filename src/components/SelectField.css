@@ -18,6 +18,11 @@
   color: var(--contrast-variant);
 }
 
+.input-field--locked .input-field__select {
+  color: var(--contrast-variant);
+  cursor: default;
+}
+
 .input-field__chevron {
   flex-shrink: 0;
   color: var(--contrast);

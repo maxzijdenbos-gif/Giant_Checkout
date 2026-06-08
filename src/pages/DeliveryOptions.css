@@ -125,104 +125,12 @@
   gap: var(--spacing\/sm);
 }
 
-.delivery-section-title {
+.delivery-cards__label {
   font-family: var(--font\/family\/headline);
   font-weight: 700;
   font-size: var(--font\/size\/headline-m-body-xl);
   line-height: var(--font\/font\/line-height\/medium);
   color: var(--contrast);
-}
-
-/* ── Selectable card ────────────────────────────── */
-.selectable-card {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  padding: var(--spacing\/m);
-  border: 1.5px solid var(--colors\/grey-10);
-  border-radius: 8px;
-  background: #ffffff;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-}
-
-.selectable-card--selected {
-  border-color: var(--colors\/primary);
-}
-
-.selectable-card__icon {
-  display: flex;
-  align-items: center;
-  height: 23px;
-  flex-shrink: 0;
-}
-
-.selectable-card__icon img {
-  display: block;
-}
-
-.selectable-card__body {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing\/sm);
-}
-
-.selectable-card__title {
-  font-family: var(--font\/family\/headline);
-  font-weight: 700;
-  font-size: var(--font\/size\/headline-m-body-xl);
-  line-height: var(--font\/font\/line-height\/medium);
-  color: var(--contrast);
-}
-
-.selectable-card__subtitle {
-  font-family: var(--font\/family\/body);
-  font-size: var(--font\/size\/body-l-action-l);
-  line-height: var(--font\/font\/line-height\/medium);
-  color: var(--contrast);
-}
-
-.selectable-card__address {
-  display: flex;
-  flex-direction: column;
-}
-
-.selectable-card__address p {
-  font-family: var(--font\/family\/body);
-  font-size: var(--font\/size\/body-l-action-l);
-  line-height: var(--font\/font\/line-height\/medium);
-  color: var(--contrast);
-}
-
-.selectable-card__actions {
-  display: flex;
-  gap: var(--spacing\/m);
-}
-
-.selectable-card__action-btn {
-  font-family: var(--font\/family\/action);
-  font-weight: 800;
-  font-size: var(--font\/size\/body-m-action-m);
-  line-height: var(--font\/font\/line-height\/xsmall);
-  text-transform: uppercase;
-  color: var(--contrast);
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  letter-spacing: 0.3px;
-}
-
-.selectable-card__price {
-  font-family: var(--font\/family\/body);
-  font-size: var(--font\/size\/body-l-action-l);
-  line-height: var(--font\/font\/line-height\/medium);
-  color: var(--contrast);
-  white-space: nowrap;
-  flex-shrink: 0;
 }
 
 /* ── Continue button ────────────────────────────── */
@@ -268,7 +176,22 @@
 
 @media (max-width: 800px) {
   .delivery-layout { flex-direction: column; }
+
+  /* Move order summary above the form on mobile */
+  .delivery-right {
+    order: -1;
+    width: 100%;
+    justify-content: center;
+    padding: var(--general\/m);
+  }
+
   .delivery-left { justify-content: center; padding: var(--general\/m); }
   .delivery-left__inner { width: 100%; }
-  .delivery-right { width: 100%; justify-content: center; padding: var(--general\/m); }
+
+  /* Full-width continue button on mobile */
+  .btn-save-continue {
+    width: 100%;
+    align-self: stretch;
+    height: 56px;
+  }
 }

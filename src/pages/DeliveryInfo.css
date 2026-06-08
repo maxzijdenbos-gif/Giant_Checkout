@@ -40,6 +40,32 @@
   gap: var(--spacing\/m);
 }
 
+.checkout-step__heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkout-step__logout-btn {
+  width: auto;
+  height: 36px;
+  padding: 0 var(--spacing\/sm);
+  background: transparent;
+  border: 2px solid var(--colors\/primary);
+  border-radius: var(--general\/ml);
+  color: var(--colors\/primary);
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-s-action-s);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.checkout-step__logout-btn:hover {
+  opacity: 0.75;
+}
+
 .checkout-step__heading {
   font-family: var(--font\/family\/headline);
   font-weight: 700;
@@ -90,6 +116,10 @@
 
 /* ── Save and continue button ──────────────────────── */
 .btn-save-continue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing\/xs);
   height: 48px;
   background: var(--colors\/primary);
   color: #ffffff;
@@ -134,6 +164,14 @@
     flex-direction: column;
   }
 
+  /* Move order summary (right column) above the form on mobile */
+  .delivery-right {
+    order: -1;
+    width: 100%;
+    justify-content: center;
+    padding: var(--general\/m);
+  }
+
   .delivery-left {
     justify-content: center;
     padding: var(--general\/m);
@@ -143,14 +181,15 @@
     width: 100%;
   }
 
-  .delivery-right {
-    width: 100%;
-    justify-content: center;
-    padding: var(--general\/m);
-  }
-
   .form-row {
     flex-direction: column;
     gap: 0;
+  }
+
+  /* Full-width continue button on mobile */
+  .btn-save-continue {
+    width: 100%;
+    align-self: stretch;
+    height: 56px;
   }
 }

@@ -102,3 +102,12 @@
 .store-confirmation-card__action-link:hover {
   opacity: 0.7;
 }
+
+.store-confirmation-note {
+  font-family: var(--font\/family\/body);
+  font-weight: 400;
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/small);
+  color: var(--contrast-variant);
+  margin: 0;
+}

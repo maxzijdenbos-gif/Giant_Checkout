@@ -18,8 +18,15 @@
 
 .checkout-start__options {
   display: flex;
-  gap: var(--general\/xl);
-  align-items: flex-start;
+  gap: var(--general\/ml);
+  align-items: stretch;
+}
+
+.checkout-start__divider {
+  width: 1px;
+  background: var(--colors\/grey-10);
+  align-self: stretch;
+  flex-shrink: 0;
 }
 
 /* Cards */
@@ -32,16 +39,13 @@
   border-radius: var(--general\/m);
 }
 
-.option-card--shaded {
-  background: var(--colors\/grey-05);
-}
-
 .option-card__title {
   font-family: var(--font\/family\/display);
   font-weight: 800;
   font-size: var(--font\/size\/display-xsmall);
   line-height: var(--font\/font\/line-height\/large);
   text-transform: uppercase;
+  text-align: center;
   color: var(--contrast);
 }
 
@@ -87,15 +91,41 @@
 }
 
 @media (max-width: 800px) {
+  .checkout-start__title {
+    display: none;
+  }
+
+  .checkout-start__main {
+    padding: var(--general\/m) var(--general\/m) var(--general\/ml);
+    gap: 0;
+    align-items: stretch;
+  }
+
   .checkout-start__options {
     flex-direction: column;
-    align-items: center;
-    gap: var(--spacing\/sm);
+    align-items: stretch;
+    gap: 8px;
     width: 100%;
+  }
+
+  /* Reorder: Guest Checkout (last-child) first, divider middle, Giant ID (first-child) last */
+  .option-card:first-child { order: 3; }
+  .checkout-start__divider { order: 2; }
+  .option-card:last-child  { order: 1; }
+
+  .checkout-start__divider {
+    width: 100%;
+    height: 1px;
+    align-self: unset;
   }
 
   .option-card {
     width: 100%;
-    max-width: 420px;
+    max-width: none;
+    padding: var(--general\/ml) var(--general\/ml) var(--general\/m);
+  }
+
+  .option-card .btn {
+    height: 40px;
   }
 }

@@ -1,3 +1,92 @@
+/* ── Store skeleton loader ──────────────────────────────── */
+
+/*
+  Single steady left-to-right sweep via a pseudo-element translateX.
+  This gives a perfectly linear, one-directional motion that restarts
+  cleanly — no bounce, no ease acceleration.
+  Duration 2.5 s keeps it calm and deliberate.
+*/
+@keyframes skeleton-shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+.store-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/sm);
+}
+
+.skeleton-bone {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  /* Base tone sits between the Figma light (#f9fafb) and dark (#e5e7eb) */
+  background: #edf0f2;
+}
+
+/* The travelling highlight — a semi-transparent white band */
+.skeleton-bone::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent     0%,
+    rgba(255,255,255,0.65) 50%,
+    transparent    100%
+  );
+  transform: translateX(-100%);
+  animation: skeleton-shimmer 2.5s linear infinite;
+}
+
+/* Map / large placeholder */
+.skeleton-bone--map {
+  width: 100%;
+  height: 232px;
+}
+
+/* Short inline text bar */
+.skeleton-bone--text-short {
+  width: 313px;
+  height: 24px;
+}
+
+/* Full-width text bar (checkbox placeholder) */
+.skeleton-bone--text-full {
+  width: 100%;
+  height: 24px;
+}
+
+/* Pill CTA button */
+.skeleton-bone--pill {
+  width: 209px;
+  height: 48px;
+  border-radius: 32px;
+}
+
+/* Pair of equal-width store-card skeletons */
+.store-skeleton__card-row {
+  display: flex;
+  gap: var(--spacing\/sm);
+  height: 84px;
+}
+
+.store-skeleton__card-row .skeleton-bone {
+  flex: 1;
+  height: 100%;
+}
+
+/* ── Store skeleton section heading ── */
+.store-skeleton-heading {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-m-body-xl);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  margin: 0;
+}
+
 .store-fetch-error {
   font-family: var(--font\/family\/body);
   font-size: var(--font\/size\/body-s-action-s);

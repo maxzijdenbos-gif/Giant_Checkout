@@ -7,8 +7,7 @@ import Flow2Payment from './pages/Flow2Payment'
 import Flow2DeliveryInfo from './pages/Flow2DeliveryInfo'
 import Flow2ShippingOptions from './pages/Flow2ShippingOptions'
 import Flow2StoreConfirmation from './pages/Flow2StoreConfirmation'
-import type { DeliverySelection } from './types'
-import type { PrototypeFlow } from './types'
+import type { DeliverySelection, PrototypeFlow, AddressData } from './types'
 import type { GiantDealer } from './giantDealers'
 
 type Page = 'checkout-start' | 'delivery' | 'delivery-options' | 'payment' | 'flow2-delivery' | 'flow2-shipping' | 'flow2-store-selection'
@@ -16,16 +15,19 @@ type Page = 'checkout-start' | 'delivery' | 'delivery-options' | 'payment' | 'fl
 export default function App() {
   const [page, setPage] = useState<Page>('checkout-start')
   const [deliverySelection, setDeliverySelection] = useState<DeliverySelection>('store')
-  const [prototypeFlow, setPrototypeFlow] = useState<PrototypeFlow>('new-checkout')
+  const [prototypeFlow, setPrototypeFlow] = useState<PrototypeFlow>('current-checkout')
   const [flow2DeliveryType, setFlow2DeliveryType] = useState<'delivery' | 'store'>('delivery')
   const [dealers, setDealers] = useState<GiantDealer[]>([])
   const [selectedDealer, setSelectedDealer] = useState<GiantDealer | null>(null)
+  const [addressData, setAddressData] = useState<AddressData | null>(null)
+  const [loggedIn, setLoggedIn] = useState(false)
 
   function handlePrototypeFlowChange(flow: PrototypeFlow) {
     setPrototypeFlow(flow)
     setPage('checkout-start')
     setDeliverySelection('store')
     setFlow2DeliveryType('delivery')
+    setLoggedIn(false)
   }
 
   const prototypeSwitcherProps = {
@@ -48,7 +50,7 @@ export default function App() {
     case 'flow2-delivery':
       return (
         <Flow2DeliveryInfo
-          onBack={() => setPage('checkout-start')}
+          onBack={() => { setLoggedIn(false); setPage('checkout-start') }}
           onContinue={() => setPage('flow2-shipping')}
           onStoreFound={(foundDealers, closest) => {
             setDealers(foundDealers)
@@ -57,6 +59,8 @@ export default function App() {
           }}
           deliveryType={flow2DeliveryType}
           onDeliveryTypeChange={setFlow2DeliveryType}
+          loggedIn={loggedIn}
+          onLogOut={() => { setLoggedIn(false); setPage('checkout-start') }}
           {...prototypeSwitcherProps}
         />
       )
@@ -96,14 +100,17 @@ export default function App() {
           onContinue={() => setPage('payment')}
           deliverySelection={deliverySelection}
           onDeliveryChange={setDeliverySelection}
+          addressData={addressData}
           {...prototypeSwitcherProps}
         />
       )
     case 'delivery':
       return (
         <DeliveryInfo
-          onBack={() => setPage('checkout-start')}
-          onContinue={() => setPage('delivery-options')}
+          onBack={() => { setLoggedIn(false); setPage('checkout-start') }}
+          onContinue={(data) => { setAddressData(data); setPage('delivery-options') }}
+          loggedIn={loggedIn}
+          onLogOut={() => { setLoggedIn(false); setPage('checkout-start') }}
           {...prototypeSwitcherProps}
         />
       )
@@ -111,6 +118,10 @@ export default function App() {
       return (
         <CheckoutStart
           onGuestCheckout={() => setPage(prototypeFlow === 'new-checkout' ? 'flow2-delivery' : 'delivery')}
+          onLoggedInCheckout={() => {
+            setLoggedIn(true)
+            setPage(prototypeFlow === 'new-checkout' ? 'flow2-delivery' : 'delivery')
+          }}
           {...prototypeSwitcherProps}
         />
       )

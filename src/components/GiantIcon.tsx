@@ -52,6 +52,14 @@ export function Check24({ size = 24, className, style, 'aria-hidden': h }: IconP
   )
 }
 
+export function ChevronLeft16({ size = 16, className, style, 'aria-hidden': h }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={style} aria-hidden={h}>
+      <path d="M10 3L6 8L10 13" stroke="currentColor" strokeWidth="2"/>
+    </svg>
+  )
+}
+
 export function ChevronDown16({ size = 16, className, style, 'aria-hidden': h }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={style} aria-hidden={h}>
@@ -117,6 +125,14 @@ export function ArrowRight24({ size = 24, className, style, 'aria-hidden': h }: 
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={style} aria-hidden={h}>
       <path d="M17.75 13L3 13V11L17.75 11L13.25 5.00001H15.75L21 12L15.75 19L13.25 19L17.75 13Z" fill="currentColor"/>
+    </svg>
+  )
+}
+
+export function ChevronRight24({ size = 24, className, style, 'aria-hidden': h }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={style} aria-hidden={h}>
+      <path d="M9 5L15 12L9 19" stroke="currentColor" strokeWidth="2"/>
     </svg>
   )
 }
@@ -198,6 +214,24 @@ export function Delivery32({ size = 32, className, style, 'aria-hidden': h }: Ic
     <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={style} aria-hidden={h}>
       <path fillRule="evenodd" clipRule="evenodd" d="M20 11H26.499L30 18V23H26.8262C26.4141 24.1647 25.3059 25 24 25C22.6941 25 21.5859 24.1647 21.1738 23H13.8262C13.4141 24.1647 12.3059 25 11 25C9.69415 25 8.58594 24.1647 8.17383 23H4.5V15H6.5V21H8.17383C8.58594 19.8353 9.69415 19 11 19C12.3059 19 13.4141 19.8353 13.8262 21H18V9H4.5V7H20V11ZM11 21C10.4477 21 10 21.4477 10 22C10 22.5523 10.4477 23 11 23C11.5523 23 12 22.5523 12 22C12 21.4477 11.5523 21 11 21ZM24 21C23.4477 21 23 21.4477 23 22C23 22.5523 23.4477 23 24 23C24.5523 23 25 22.5523 25 22C25 21.4477 24.5523 21 24 21ZM20 21H21.1738C21.5859 19.8353 22.6941 19 24 19C25.3059 19 26.4141 19.8353 26.8262 21H28V18.5L25.3643 13H20V21Z" fill="currentColor"/>
       <path d="M7.70703 13H1L4.5 11H7.70703V13Z" fill="currentColor"/>
+    </svg>
+  )
+}
+
+export function ReturnProduct32({ size = 32, className, style, 'aria-hidden': h }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={style} aria-hidden={h}>
+      <path d="M6.8877 9.83691C5.69628 11.5947 5.00001 13.7145 5 16C5.00003 22.0751 9.92489 27 16 27C17.3025 27 18.5506 26.7721 19.709 26.3574L19.125 25.3457L23.75 25.418L21.4375 29.4229L20.7109 28.1191C19.2495 28.6876 17.6604 29 16 29C8.82032 29 3.00003 23.1797 3 16C3.00001 13.3018 3.82351 10.7924 5.23242 8.71387L6.8877 9.83691Z" fill="currentColor"/>
+      <path d="M11.2861 3.87598C12.7574 3.30333 14.3532 3 16.0273 3C23.2377 3 29 8.82902 29 16.0039C29 18.6985 28.2001 21.183 26.7891 23.2646L25.1328 22.1416C26.3222 20.3868 27 18.2931 27 16.0039C27 9.92396 22.1235 5 16.0273 5C14.7049 5 13.4497 5.22199 12.2871 5.6377L12.874 6.6543L8.25 6.58203L10.5625 2.57715L11.2861 3.87598Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M23 16H22V22H10V16H9V10H23V16ZM12 20H20V16H12V20ZM11 14H21V12H11V14Z" fill="currentColor"/>
+    </svg>
+  )
+}
+
+export function Home32({ size = 32, className, style, 'aria-hidden': h }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={style} aria-hidden={h}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M27 10.2949V26H5V10.2949L16 2.55469L27 10.2949ZM7 11.333V24H12V17H20V24H25V11.333L16 5L7 11.333ZM14 24H18V19H14V24Z" fill="currentColor"/>
     </svg>
   )
 }

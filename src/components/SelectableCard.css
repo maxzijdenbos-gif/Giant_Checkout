@@ -1,0 +1,203 @@
+/* ── Selectable card ────────────────────────────── */
+.selectable-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: var(--spacing\/m);
+  border: 1px solid var(--colors\/grey-10);
+  border-radius: var(--spacing\/xs);
+  background: var(--tone);
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.selectable-card--selected {
+  border-width: 1.5px;
+  border-color: var(--colors\/primary);
+  gap: var(--spacing\/sm);
+}
+
+.selectable-card__row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.selectable-card__icon {
+  display: flex;
+  align-items: center;
+  height: 23px;
+  flex-shrink: 0;
+}
+
+.selectable-card__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/sm);
+}
+
+.selectable-card__headline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/xxs);
+}
+
+.selectable-card__title {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-m-body-xl);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.selectable-card__sub {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/small);
+  color: var(--contrast);
+}
+
+.selectable-card__date {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.selectable-card__price {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Store sub-card (expanded inside Home setup when selected) ── */
+.store-subcard {
+  background: var(--colors\/grey-05);
+  border-radius: var(--spacing\/xs);
+  padding: var(--spacing\/m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/sm);
+  width: 100%;
+  text-align: left;
+}
+
+.store-subcard__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/xxs);
+}
+
+.store-subcard__name {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-m-body-xl);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.store-subcard__description {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-m-action-m);
+  line-height: var(--font\/font\/line-height\/small);
+  color: var(--contrast);
+}
+
+.store-subcard__date {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.store-subcard__address {
+  display: flex;
+  flex-direction: column;
+}
+
+.store-subcard__address p {
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  margin: 0;
+}
+
+.store-subcard__actions {
+  display: flex;
+  gap: var(--spacing\/xs);
+  flex-wrap: wrap;
+}
+
+.store-subcard__btn {
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-s-action-s);
+  line-height: var(--font\/font\/line-height\/xsmall);
+  text-transform: uppercase;
+  color: var(--colors\/primary);
+  background: none;
+  border: 2px solid var(--colors\/primary);
+  border-radius: var(--general\/ml);
+  padding: var(--spacing\/xs) var(--spacing\/sm);
+  min-height: 32px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.store-subcard__btn:hover {
+  background: var(--giant\/velocity-blue);
+  border-color: var(--giant\/velocity-blue);
+  color: #ffffff;
+}
+
+/* ── Mobile ─────────────────────────────────────── */
+@media (max-width: 800px) {
+  .store-subcard__actions {
+    flex-direction: column;
+  }
+
+  .store-subcard__btn {
+    width: 100%;
+    text-align: center;
+    min-height: 40px;
+    padding: 12px var(--spacing\/sm);
+  }
+}
+
+/* ── Sub-card skeleton loader ───────────────────── */
+@keyframes subcard-shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+.subcard-skeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--spacing\/xs);
+  height: 136px;
+  width: 100%;
+  background: #edf0f2;
+}
+
+.subcard-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent          0%,
+    rgba(255,255,255,0.65) 50%,
+    transparent         100%
+  );
+  transform: translateX(-100%);
+  animation: subcard-shimmer 2.5s linear infinite;
+}

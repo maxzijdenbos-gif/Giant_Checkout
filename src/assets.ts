@@ -33,11 +33,19 @@ import _imgAutofill      from './assets/figma/autofill.png'
 export const imgAutofill      = _imgAutofill      as string
 
 // ── Product images (order summary) ────────────────
-import _imgProductPropel from './assets/figma/product-propel.png'
-import _imgProductAnthem from './assets/figma/product-anthem.png'
-import _imgProductAurea  from './assets/figma/product-aurea.png'
-import _imgProductRevolt from './assets/figma/product-revolt.png'
-export const imgProductPropel = _imgProductPropel as string
-export const imgProductAnthem = _imgProductAnthem as string
-export const imgProductAurea  = _imgProductAurea  as string
-export const imgProductRevolt = _imgProductRevolt as string
+import _imgPurpleBikeBig   from './assets/figma/purple-bike-big.png'
+import _imgPurpleBikeSmall from './assets/figma/purple-bike-small.png'
+import _imgBlueBikeBig     from './assets/figma/blue-bike-big.png'
+import _imgBlueBikeSmall   from './assets/figma/blue-bike-small.png'
+import _imgGlassesBig      from './assets/figma/glasses-big.png'
+import _imgGlassesSmall    from './assets/figma/glasses-small.png'
+import _imgWhiteBikeBig    from './assets/figma/white-bike-big.png'
+import _imgWhiteBikeSmall  from './assets/figma/white-bike-small.png'
+export const imgPurpleBikeBig   = _imgPurpleBikeBig   as string
+export const imgPurpleBikeSmall = _imgPurpleBikeSmall as string
+export const imgBlueBikeBig     = _imgBlueBikeBig     as string
+export const imgBlueBikeSmall   = _imgBlueBikeSmall   as string
+export const imgGlassesBig      = _imgGlassesBig      as string
+export const imgGlassesSmall    = _imgGlassesSmall    as string
+export const imgWhiteBikeBig    = _imgWhiteBikeBig    as string
+export const imgWhiteBikeSmall  = _imgWhiteBikeSmall  as string

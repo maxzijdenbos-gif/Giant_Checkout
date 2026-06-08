@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Divider from '../components/Divider'
+import InputField from '../components/InputField'
 import OrderSummary from '../components/OrderSummary'
 import StorePickerModal from '../components/StorePickerModal'
 import * as GiantIcon from '../components/GiantIcon'
@@ -11,6 +12,16 @@ import './DeliveryInfo.css'
 import './DeliveryOptions.css'
 import './Flow2DeliveryInfo.css'
 import './Flow2StoreConfirmation.css'
+
+type PickupForm = {
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+}
+
+const EMPTY_PICKUP: PickupForm = { firstName: '', lastName: '', email: '', phone: '' }
+const MANDATORY_PICKUP: (keyof PickupForm)[] = ['firstName', 'lastName', 'email', 'phone']
 
 interface Props {
   onBack: () => void
@@ -28,6 +39,24 @@ export default function Flow2StoreConfirmation({
   const [selectedDealer, setSelectedDealer] = useState<GiantDealer>(initialDealer)
   const [showModal, setShowModal] = useState(false)
   const [newsletter, setNewsletter] = useState(false)
+  const [pickup, setPickup] = useState<PickupForm>(EMPTY_PICKUP)
+  const [validated, setValidated] = useState(false)
+
+  function setP(field: keyof PickupForm) {
+    return (value: string) => setPickup(prev => ({ ...prev, [field]: value }))
+  }
+
+  function pe(field: keyof PickupForm): boolean {
+    return validated && MANDATORY_PICKUP.includes(field) && !pickup[field].trim()
+  }
+
+  function handleContinue() {
+    if (MANDATORY_PICKUP.some(f => !pickup[f].trim())) {
+      setValidated(true)
+      return
+    }
+    onContinue()
+  }
 
   return (
     <div className="page">
@@ -62,7 +91,7 @@ export default function Flow2StoreConfirmation({
 
               {/* Selected store card */}
               <div className="checkout-section">
-                <h3 className="delivery-section-title">Select a store location</h3>
+                <h3 className="delivery-section-title">This is the closest store with your items in stock</h3>
                 <div className="store-confirmation-card">
                   <p className="store-confirmation-card__name">
                     {selectedDealer.name}
@@ -87,6 +116,26 @@ export default function Flow2StoreConfirmation({
                 </div>
               </div>
 
+              {/* Who's picking up the order? */}
+              <div className="checkout-section">
+                <h3 className="delivery-section-title">Who's picking up the order?</h3>
+                <div className="form-grid">
+                  <div className="form-row">
+                    <InputField label="First name" placeholder="John"
+                      value={pickup.firstName} onChange={setP('firstName')} error={pe('firstName')} />
+                    <InputField label="Last name" placeholder="Doe"
+                      value={pickup.lastName} onChange={setP('lastName')} error={pe('lastName')} />
+                  </div>
+                  <div className="form-row">
+                    <InputField label="Email" type="email" placeholder="Name@email.com"
+                      value={pickup.email} onChange={setP('email')} error={pe('email')} />
+                    <InputField label="Phone number" type="tel" placeholder="(555) 555-5555"
+                      value={pickup.phone} onChange={setP('phone')} error={pe('phone')} />
+                  </div>
+                </div>
+                <p className="store-confirmation-note">Valid ID is required for pick-up.</p>
+              </div>
+
               {/* Newsletter */}
               <div className="form-checkbox-group">
                 <button
@@ -107,7 +156,7 @@ export default function Flow2StoreConfirmation({
                 </button>
               </div>
 
-              <button className="btn-save-continue" onClick={onContinue}>
+              <button className="btn-save-continue" onClick={handleContinue}>
                 Continue to payment
               </button>
             </section>
