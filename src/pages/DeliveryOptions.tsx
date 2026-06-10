@@ -4,6 +4,7 @@ import Footer from '../components/Footer'
 import Divider from '../components/Divider'
 import OrderSummary from '../components/OrderSummary'
 import SelectableCard from '../components/SelectableCard'
+import OpeningHoursModal from '../components/OpeningHoursModal'
 import * as GiantIcon from '../components/GiantIcon'
 import type { DeliverySelection, PrototypeFlow, AddressData } from '../types'
 import './DeliveryOptions.css'
@@ -37,6 +38,7 @@ export default function DeliveryOptions({
     ? [addressData.city, addressData.state, addressData.zip].filter(Boolean).join(', ')
     : ''
 
+  const [showOpeningHours, setShowOpeningHours] = useState(false)
   const loadedCards = useRef<Set<DeliverySelection>>(new Set())
   const [subcardLoading, setSubcardLoading] = useState(false)
 
@@ -73,7 +75,7 @@ export default function DeliveryOptions({
             <p>(98.7 mi.)</p>
           </div>
           <div className="store-subcard__actions">
-            <button className="store-subcard__btn" onClick={e => e.stopPropagation()}>
+            <button className="store-subcard__btn" onClick={e => { e.stopPropagation(); setShowOpeningHours(true) }}>
               Show opening hours
             </button>
             <button className="store-subcard__btn" onClick={e => e.stopPropagation()}>
@@ -101,7 +103,12 @@ export default function DeliveryOptions({
               aria-label="Go back to address"
             >
               <div className="collapsed-step__header">
-                <h2 className="checkout-step__heading">Address</h2>
+                <div className="step-heading-complete">
+                  <div className="step-checkmark">
+                    <GiantIcon.Check16 aria-hidden style={{ color: 'white' }} />
+                  </div>
+                  <h2 className="checkout-step__heading">Address</h2>
+                </div>
                 <GiantIcon.Edit24 className="collapsed-step__edit-icon" aria-hidden />
               </div>
               <div className="address-summary">
@@ -118,7 +125,7 @@ export default function DeliveryOptions({
 
             {/* Delivery options — active */}
             <section className="checkout-step">
-              <h2 className="checkout-step__heading">Delivery options</h2>
+              <ol className="checkout-step__heading-ol" start={2}><li>Delivery options</li></ol>
 
               <div className="delivery-cards">
                 <p className="delivery-cards__label">Choose a delivery option</p>
@@ -172,7 +179,7 @@ export default function DeliveryOptions({
             {/* Payment — collapsed */}
             <section className="checkout-step checkout-step--collapsed">
               <Divider thick />
-              <h2 className="checkout-step__heading">Payment</h2>
+              <ol className="checkout-step__heading-ol" start={3}><li>Payment</li></ol>
             </section>
 
           </div>
@@ -186,6 +193,10 @@ export default function DeliveryOptions({
       </div>
 
       <Footer variant="dark" />
+
+      {showOpeningHours && (
+        <OpeningHoursModal onClose={() => setShowOpeningHours(false)} />
+      )}
     </div>
   )
 }

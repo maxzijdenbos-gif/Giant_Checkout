@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ReturnPolicyModal from './ReturnPolicyModal'
 import {
   imgPurpleBikeBig, imgPurpleBikeSmall,
   imgBlueBikeBig,   imgBlueBikeSmall,
@@ -23,7 +24,9 @@ const PRODUCTS = [
   { imgBig: imgWhiteBikeBig,  imgSmall: imgWhiteBikeSmall,  name: 'Revolt Advanced 0',           price: '$3,950.00', meta: 'Snow Drift | L' },
 ]
 
-const BASE_TOTAL = 15655 // 14350 + 1100 + 225 - 20
+const ITEMS_SUBTOTAL = 15675 // 14350 + 1100 + 225
+const BUNDLE_DISCOUNT = 20
+const COUPON_RATE = 0.10
 
 function formatEuro(amount: number): string {
   const [int, dec] = amount.toFixed(2).split('.')
@@ -41,17 +44,23 @@ function InfoIcon() {
 
 export default function OrderSummary({ deliverySelection = 'store' }: Props) {
   const [itemsExpanded, setItemsExpanded] = useState(false)
+  const [couponApplied, setCouponApplied] = useState(false)
+  const [showReturnModal, setShowReturnModal] = useState(false)
+
   const delivery = DELIVERY_OPTIONS[deliverySelection]
   const deliveryValueLabel = delivery.price === 0 ? 'Free' : formatEuro(delivery.price)
-  const total = BASE_TOTAL + delivery.price
+  const couponDiscount = couponApplied ? Math.round(ITEMS_SUBTOTAL * COUPON_RATE * 100) / 100 : 0
+  const totalSavings = BUNDLE_DISCOUNT + couponDiscount
+  const total = ITEMS_SUBTOTAL - totalSavings + delivery.price
   const totalFormatted = formatEuro(total)
 
   const lineItems = [
-    { label: '4 items',              value: '$14.350,00', cls: '' },
-    { label: 'Sales tax',            value: '$1,100',     cls: '' },
-    { label: 'Destination fee',      value: '$225,00',    cls: '', tooltip: true },
-    { label: 'Delivery estimation',  value: deliveryValueLabel, cls: '' },
-    { label: 'Total savings',        value: '- $20,00',   cls: 'order-summary__line-value--savings', savings: true },
+    { label: '4 items',              value: '$14.350,00',                    cls: '' },
+    { label: 'Sales tax',            value: '$1.100,00',                     cls: '' },
+    { label: 'Destination fee',      value: '$225,00',                       cls: '', tooltip: true },
+    ...(couponApplied ? [{ label: 'GIANT10', value: `- ${formatEuro(couponDiscount)}`, cls: 'order-summary__line-value--savings', savings: true }] : []),
+    { label: 'Delivery estimation',  value: deliveryValueLabel,              cls: '' },
+    { label: 'Total savings',        value: `- ${formatEuro(totalSavings)}`, cls: 'order-summary__line-value--savings', savings: true },
   ]
 
   return (
@@ -87,7 +96,7 @@ export default function OrderSummary({ deliverySelection = 'store' }: Props) {
       </div>
 
       {/* Coupon */}
-      <CouponSection />
+      <CouponSection onApplied={() => setCouponApplied(true)} />
 
       <Divider />
 
@@ -137,13 +146,17 @@ export default function OrderSummary({ deliverySelection = 'store' }: Props) {
       <Divider />
 
       {/* Return policy USP */}
-      <div className="order-summary__usp">
+      <button className="order-summary__usp" onClick={() => setShowReturnModal(true)}>
         <GiantIcon.ReturnProduct32 aria-hidden />
         <div className="order-summary__usp-content">
           <p className="order-summary__usp-title">Right to return</p>
           <p className="order-summary__usp-body">You have 14 days to change your mind</p>
         </div>
-      </div>
+      </button>
+
+      {showReturnModal && (
+        <ReturnPolicyModal onClose={() => setShowReturnModal(false)} />
+      )}
 
     </div>
   )

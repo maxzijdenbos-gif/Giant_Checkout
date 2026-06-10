@@ -21,6 +21,9 @@
   --tint:                  #dedee0;   /* light tint surface          */
   --tint-variant:          #f2f2f5;   /* footer / alternate tint     */
   --alert:                 #c83317;   /* error / alert red           */
+  --surface---error:       #f9ebe8;   /* error light red surface     */
+  --text---success:        #007e11;   /* success green text/border   */
+  --surface---success:     #ecf8ea;   /* success light green surface */
   --surface---cta:         #06038d;   /* CTA surface (= primary)     */
   --text---accent:         #58626e;   /* accent text (= contrast-variant) */
   --giant\/white:          #ffffff;

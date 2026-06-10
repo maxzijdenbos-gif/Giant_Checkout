@@ -117,7 +117,12 @@ export default function Payment({
               aria-label="Go back to address"
             >
               <div className="collapsed-step__header">
-                <h2 className="checkout-step__heading">Address</h2>
+                <div className="step-heading-complete">
+                  <div className="step-checkmark">
+                    <GiantIcon.Check16 aria-hidden style={{ color: 'white' }} />
+                  </div>
+                  <h2 className="checkout-step__heading">Address</h2>
+                </div>
                 <EditIcon />
               </div>
               <div className="address-summary">
@@ -139,7 +144,12 @@ export default function Payment({
               aria-label="Go back to delivery options"
             >
               <div className="collapsed-step__header">
-                <h2 className="checkout-step__heading">Delivery options</h2>
+                <div className="step-heading-complete">
+                  <div className="step-checkmark">
+                    <GiantIcon.Check16 aria-hidden style={{ color: 'white' }} />
+                  </div>
+                  <h2 className="checkout-step__heading">Delivery options</h2>
+                </div>
                 <EditIcon />
               </div>
               <div className="address-summary">
@@ -154,7 +164,7 @@ export default function Payment({
 
             {/* Active: Payment */}
             <section className="checkout-step">
-              <h2 className="checkout-step__heading">Payment</h2>
+              <ol className="checkout-step__heading-ol" start={3}><li>Payment</li></ol>
 
               {/* Stripe Payment Element mock */}
               <div className="stripe-mock">

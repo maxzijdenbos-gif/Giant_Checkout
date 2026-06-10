@@ -1,0 +1,39 @@
+/* ── Return-specific modal width ────────────────── */
+.usp-modal--return {
+  width: 600px;
+}
+
+/* ── Body text ──────────────────────────────────── */
+.return-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--general\/m);
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+/* ── CTA ────────────────────────────────────────── */
+.return-modal__actions {
+  display: flex;
+}
+
+.return-modal__cta {
+  height: 40px;
+  padding: 0 var(--general\/m);
+  background: var(--cta, #06038d);
+  color: var(--cta-contrast, #ffffff);
+  border: none;
+  border-radius: var(--general\/ml);
+  font-family: var(--font\/family\/action);
+  font-weight: 800;
+  font-size: var(--font\/size\/body-s-action-s);
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.return-modal__cta:hover {
+  opacity: 0.9;
+}

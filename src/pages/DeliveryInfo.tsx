@@ -153,7 +153,7 @@ export default function DeliveryInfo({ onBack, onContinue, prototypeFlow, onProt
             {/* ── Address step — active ─────────────────────── */}
             <section className="checkout-step checkout-step--active">
               <div className="checkout-step__heading-row">
-                <h2 className="checkout-step__heading">Address</h2>
+                <ol className="checkout-step__heading-ol" start={1}><li>Address</li></ol>
                 {loggedIn && (
                   <button className="checkout-step__logout-btn" onClick={onLogOut}>
                     Log out
@@ -304,13 +304,13 @@ export default function DeliveryInfo({ onBack, onContinue, prototypeFlow, onProt
             {/* ── Delivery options — collapsed ──────────────── */}
             <section className="checkout-step checkout-step--collapsed">
               <Divider thick />
-              <h2 className="checkout-step__heading">Delivery options</h2>
+              <ol className="checkout-step__heading-ol" start={2}><li>Delivery options</li></ol>
             </section>
 
             {/* ── Payment — collapsed ───────────────────────── */}
             <section className="checkout-step checkout-step--collapsed">
               <Divider thick />
-              <h2 className="checkout-step__heading">Payment</h2>
+              <ol className="checkout-step__heading-ol" start={3}><li>Payment</li></ol>
             </section>
 
           </div>

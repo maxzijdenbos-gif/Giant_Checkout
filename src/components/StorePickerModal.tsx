@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { imgMapPreview } from '../assets'
 import * as GiantIcon from './GiantIcon'
 import type { GiantDealer } from '../giantDealers'
@@ -15,7 +16,12 @@ export default function StorePickerModal({ dealers, selectedId, onClose, onSelec
   const [currentId, setCurrentId] = useState(selectedId)
   const currentDealer = dealers.find(d => d.id === currentId) ?? dealers[0]
 
-  return (
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = '' }
+  }, [])
+
+  return createPortal(
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-card" onClick={e => e.stopPropagation()}>
 
@@ -84,6 +90,7 @@ export default function StorePickerModal({ dealers, selectedId, onClose, onSelec
         </button>
 
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

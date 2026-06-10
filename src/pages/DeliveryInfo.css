@@ -23,14 +23,20 @@
   gap: var(--general\/ml);
 }
 
-/* Right: grey, fixed 570px */
+/* Right: grey on desktop only, fixed 570px */
 .delivery-right {
   width: 570px;
   flex-shrink: 0;
-  background: var(--colors\/grey-05);
+  background: #ffffff;
   padding: var(--general\/l) var(--general\/ml);
   display: flex;
   justify-content: flex-start;
+}
+
+@media (min-width: 801px) {
+  .delivery-right {
+    background: var(--colors\/grey-05);
+  }
 }
 
 /* ── Checkout step ─────────────────────────────────── */
@@ -170,6 +176,10 @@
     width: 100%;
     justify-content: center;
     padding: var(--general\/m);
+  }
+
+  .delivery-layout::after {
+    display: none;
   }
 
   .delivery-left {

@@ -1,0 +1,95 @@
+/* ── Backdrop (shared by USP modals) ───────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Shared modal card ──────────────────────────── */
+.usp-modal {
+  background: #ffffff;
+  border: 1px solid var(--tint, #dedee0);
+  border-radius: var(--general\/sm);
+  padding: var(--general\/ml);
+  width: 520px;
+  max-width: calc(100vw - 48px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--general\/m);
+}
+
+.usp-modal__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--general\/xs);
+  padding-right: var(--general\/ml);
+}
+
+.usp-modal__title {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-large);
+  line-height: var(--font\/font\/line-height\/large);
+  color: var(--contrast);
+}
+
+.usp-modal__subtitle {
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-m-body-xl);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+/* ── Opening hours grid ─────────────────────────── */
+.opening-hours {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing\/xxs);
+}
+
+.opening-hours__row {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  column-gap: 24px;
+  font-family: var(--font\/family\/body);
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+}
+
+.opening-hours__pickup {
+  font-family: var(--font\/family\/body);
+  font-weight: 600;
+  font-size: var(--font\/size\/body-l-action-l);
+  line-height: var(--font\/font\/line-height\/medium);
+  color: var(--contrast);
+  margin-top: var(--general\/xs);
+}
+
+/* ── Close button ───────────────────────────────── */
+.usp-modal__close {
+  position: absolute;
+  top: var(--general\/m);
+  right: var(--general\/m);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--general\/ml);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--contrast);
+}
+
+.usp-modal__close:hover {
+  background: rgba(240, 240, 240, 0.9);
+}

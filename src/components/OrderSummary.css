@@ -227,7 +227,7 @@
   top: 0;
   bottom: 0;
   width: 85px;
-  background: linear-gradient(to right, transparent, var(--colors\/grey-05));
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
   pointer-events: none;
 }
 
@@ -260,6 +260,12 @@
   display: flex;
   gap: var(--general\/s); /* 12px */
   align-items: flex-start;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
 }
 
 .order-summary__usp-content {

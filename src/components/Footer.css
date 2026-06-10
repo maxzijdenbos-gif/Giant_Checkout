@@ -67,10 +67,11 @@
   }
 
   .footer--dark .footer-usp {
-    display: flex;
+    display: none;
   }
 
   .footer--dark .footer-text {
     align-items: center;
+    gap: var(--spacing\/sm);
   }
 }

@@ -41,10 +41,16 @@
 .delivery-right {
   width: 570px;
   flex-shrink: 0;
-  background: var(--colors\/grey-05);
+  background: #ffffff;
   padding: var(--general\/l) var(--general\/ml);
   display: flex;
   justify-content: flex-start;
+}
+
+@media (min-width: 801px) {
+  .delivery-right {
+    background: var(--colors\/grey-05);
+  }
 }
 
 /* ── Checkout step ──────────────────────────────── */
@@ -162,6 +168,36 @@
   opacity: 1;
 }
 
+/* ── Numbered step heading ──────────────────────── */
+.checkout-step__heading-ol {
+  list-style-type: decimal;
+  padding-inline-start: 28px;
+  font-family: var(--font\/family\/headline);
+  font-weight: 700;
+  font-size: var(--font\/size\/headline-large);
+  line-height: var(--font\/font\/line-height\/large);
+  color: var(--contrast);
+}
+
+/* ── Completed step heading (checkmark + title) ─── */
+.step-heading-complete {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing\/xs);
+}
+
+.step-checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #00a316;
+  flex-shrink: 0;
+  color: white;
+}
+
 /* ── Responsive ─────────────────────────────────── */
 @media (max-width: 1100px) {
   .delivery-left {
@@ -183,6 +219,10 @@
     width: 100%;
     justify-content: center;
     padding: var(--general\/m);
+  }
+
+  .delivery-layout::after {
+    display: none;
   }
 
   .delivery-left { justify-content: center; padding: var(--general\/m); }
