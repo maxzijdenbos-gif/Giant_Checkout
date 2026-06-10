@@ -70,9 +70,10 @@
   color: var(--contrast-variant);
 }
 
-/* Focus: 2px primary blue border */
+/* Focus: visually 2px primary blue border without layout shift */
 .input-field:focus-within:not(.input-field--locked):not(.input-field--error) .input-field__box {
-  border: 2px solid var(--colors\/primary);
+  border-color: var(--colors\/primary);
+  box-shadow: 0 0 0 1px var(--colors\/primary);
 }
 
 /* Error state */
