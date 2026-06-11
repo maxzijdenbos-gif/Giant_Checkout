@@ -17,11 +17,12 @@ export default function Header({ onBack, prototypeFlow, onPrototypeFlowChange }:
         <select
           className="prototype-bar__select"
           value={prototypeFlow}
+          data-flow={prototypeFlow}
           aria-label="Switch prototype"
           onChange={event => onPrototypeFlowChange(event.target.value as PrototypeFlow)}
         >
           {PROTOTYPE_FLOWS.map(flow => (
-            <option key={flow.id} value={flow.id}>{flow.label}</option>
+            <option key={flow.id} value={flow.id} style={flow.id === 'new-checkout' ? { color: '#C83317' } : undefined}>{flow.label}</option>
           ))}
         </select>
       </div>

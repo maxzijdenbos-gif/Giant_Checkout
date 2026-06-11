@@ -250,7 +250,7 @@
 
   .order-summary {
     position: sticky;
-    top: var(--general\/l);
+    top: calc(64px + var(--general\/l));
     align-self: flex-start;
   }
 }

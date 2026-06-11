@@ -7,8 +7,10 @@
   padding: 0 var(--general\/m);
   border-bottom: 1px solid var(--colors\/grey-10);
   background: var(--tone);
-  position: relative;
-  z-index: 11;
+}
+
+.prototype-bar__select[data-flow="new-checkout"] {
+  color: #C83317;
 }
 
 .prototype-bar__select {
@@ -33,7 +35,8 @@
   padding: 0 var(--general\/m);
   border-bottom: 1px solid var(--colors\/grey-10);
   background: var(--tone);
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 10;
 }
 

@@ -23,5 +23,5 @@ export const DELIVERY_OPTIONS = {
 
 export const PROTOTYPE_FLOWS: Array<{ id: PrototypeFlow; label: string }> = [
   { id: 'current-checkout', label: 'Regular flow' },
-  { id: 'new-checkout',     label: 'Compact flow' },
+  { id: 'new-checkout',     label: 'Compact flow canceled' },
 ]
