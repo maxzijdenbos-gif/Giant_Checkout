@@ -10,7 +10,6 @@ export default function Footer({ variant = 'light' }: FooterProps) {
     <footer className={`footer footer--${variant}`}>
       <div className="footer-inner">
         <div className="footer-text">
-          <p className="footer-text__help">Need some help? Please reach out to us directly through our contact form or live chat.</p>
           {variant === 'dark' && (
             <div className="footer-usp">
               <strong className="footer-usp__title">Right to Return</strong>
